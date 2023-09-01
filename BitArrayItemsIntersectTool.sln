@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.Library", "BitArrayItemsIntersection.Library\BitArrayItemsIntersection.Library.csproj", "{580BA86F-ABC9-4E91-A252-32719E65925A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.Testing", "BitArrayItemsIntersection.Testing\BitArrayItemsIntersection.Testing.csproj", "{663D9A21-9BBD-4A04-8517-A5E7D2B83300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.App.CLI", "BitArrayItemsIntersection.App.CLI\BitArrayItemsIntersection.App.CLI.csproj", "{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.App.Web", "BitArrayItemsIntersection.App.Web\BitArrayItemsIntersection.App.Web.csproj", "{F79B0024-731B-4969-8338-F5C22C8B809E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{580BA86F-ABC9-4E91-A252-32719E65925A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580BA86F-ABC9-4E91-A252-32719E65925A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580BA86F-ABC9-4E91-A252-32719E65925A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580BA86F-ABC9-4E91-A252-32719E65925A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663D9A21-9BBD-4A04-8517-A5E7D2B83300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663D9A21-9BBD-4A04-8517-A5E7D2B83300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663D9A21-9BBD-4A04-8517-A5E7D2B83300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663D9A21-9BBD-4A04-8517-A5E7D2B83300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F79B0024-731B-4969-8338-F5C22C8B809E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F79B0024-731B-4969-8338-F5C22C8B809E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F79B0024-731B-4969-8338-F5C22C8B809E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F79B0024-731B-4969-8338-F5C22C8B809E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

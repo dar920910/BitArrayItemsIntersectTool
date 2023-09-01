@@ -1,0 +1,29 @@
+@page
+@model IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<div class="jumbotron">
+    <h1 class="display-3">Welcome to BitArrayItemsIntersection!</h1>
+    <hr />
+    <form method="POST">
+        <div>
+            <label for="customRange_X" class="form-label">
+                Custom Dimension X:
+            </label>
+            <input asp-for="CustomDimension_X" id="customRange_X"
+                min="0" max="100" step="1"
+                onchange="logRangeValue_X();"/>
+            <p>Current X Value = @Model.CustomDimension_X</p>
+        </div>
+        <div>
+            <label for="customRange_Y" class="form-label">
+                Custom Dimension Y:
+            </label>
+            <input asp-for="CustomDimension_Y" id="customRange_Y"
+                min="0" max="100" step="1"
+                onchange="logRangeValue_Y();"/>
+            <p>Current Y Value = @Model.CustomDimension_Y</p>
+        </div>
+        <input type="submit"/>
+    </form>
+</div>
+<script src="scripts.js"></script>
