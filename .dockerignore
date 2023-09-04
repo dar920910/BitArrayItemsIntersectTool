@@ -1,0 +1,12 @@
+# directories
+.github/
+.vs/
+.vscode/
+**/bin/
+**/obj/
+**/out/
+
+# files
+Create-Projects.ps1
+Dockerfile*
+**/*.md

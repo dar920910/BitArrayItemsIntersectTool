@@ -1,0 +1,1 @@
+docker run --interactive --tty --rm bitarrayitemsintersection /bin/bash -c "cd /usr/local/src/BitArrayItemsIntersectTool/BitArrayItemsIntersection.Testing && dotnet test"
