@@ -340,4 +340,75 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(3)
         );
     }
+
+
+    [Test]
+    public void CreateBooleanArray_FromIntegerArray_TestCase_1()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 0, 0, 0, 1 },
+                    { 0, 1, 0, 1, 0 },
+                    { 0, 0, 1, 0, 0 },
+                    { 0, 1, 0, 1, 0 },
+                    { 1, 0, 0, 0, 1 }
+                }
+            ).Content,
+            expression: Is.EqualTo(
+                new bool[,]
+                {
+                    { true, false, false, false, true },
+                    { false, true, false, true, false },
+                    { false, false, true, false, false },
+                    { false, true, false, true, false },
+                    { true, false, false, false, true }
+                }
+            )
+        );
+    }
+
+        [Test]
+    public void CreateBooleanArray_FromIntegerArray_TestCase_2()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 1, 1, 1, 0 },
+                    { 1, 0, 1, 0, 1 },
+                    { 1, 1, 0, 1, 1 },
+                    { 1, 0, 1, 0, 1 },
+                    { 0, 1, 1, 1, 0 }
+                }
+            ).Content,
+            expression: Is.EqualTo(
+                new bool[,]
+                {
+                    { false, true, true, true, false },
+                    { true, false, true, false, true },
+                    { true, true, false, true, true },
+                    { true, false, true, false, true },
+                    { false, true, true, true, false }
+                }
+            )
+        );
+    }
+
+
+/*
+    [Test]
+    public void FindAllChargedElements_TestCase_1()
+    {
+        bool[,] array = new[,]
+        {
+            { false, false, false, false, false },
+            { false, true, false, false, false },
+            { false, false, true, false, false },
+            { false, false, false, true, false },
+            { false, false, false, false, true }
+        };
+    }
+*/
 }

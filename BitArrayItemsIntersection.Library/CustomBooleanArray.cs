@@ -23,6 +23,13 @@ public class CustomBooleanArray
         Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
     }
 
+    public CustomBooleanArray(int[,] array)
+    {
+        Content = ConvertToBooleanArray(array);
+        Length_X = Content.GetLength(dimension: 1); // count of columns-items in the array
+        Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
+    }
+
     /// <summary>
     /// Generate a two-dimensional array with the specified dimensions.
     /// </summary>
@@ -45,6 +52,31 @@ public class CustomBooleanArray
             for (int index_Y = 0; index_Y < arrLength_Y; index_Y++)
             {
                 array[index_X, index_Y] = elementPlaceholderValue;
+            }
+        }
+
+        return array;
+    }
+
+    /// <summary>
+    /// Convert an integer array to matching boolean array,
+    /// where positive elements are processed as True and
+    /// other elements are False (negative and 0).
+    /// </summary>
+    /// <param name="array">Array filled by integer values</param>
+    /// <returns>Matching two-dimensional boolean array</returns>
+    private bool[,] ConvertToBooleanArray(int[,] integers)
+    {
+        int countOfRows = integers.GetLength(dimension: 0);
+        int countOfColumns = integers.GetLength(dimension: 1);
+
+        bool[,] array = new bool[countOfRows, countOfColumns];
+
+        for (int row = 0; row < countOfRows; row++)
+        {
+            for (int column = 0; column < countOfColumns; column++)
+            {
+                array[row, column] = integers[row, column] > 0;
             }
         }
 
