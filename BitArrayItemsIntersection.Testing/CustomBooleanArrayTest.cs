@@ -115,4 +115,103 @@ public class CustomBooleanArrayTest
             Is.EqualTo(7)
         );
     }
+
+
+    [Test]
+    public void Content_Initialization_ViaUserDefinedArray_TestCase_1()
+    {
+        bool[,] array = new[,]
+        {
+            { false, false, false },
+            { false, false, false },
+            { false, false, false },
+            { false, false, false },
+            { false, false, false },
+            { false, false, false }
+        };
+
+        Assert.That(
+            actual: new CustomBooleanArray(array).Content,
+            expression: Is.EqualTo(array)
+        );
+    }
+
+    [Test]
+    public void Content_Initialization_ViaUserDefinedArray_TestCase_2()
+    {
+        bool[,] array = new[,]
+        {
+            { false, false, false, false, false },
+            { false, false, false, false, false },
+            { false, false, false, false, false },
+        };
+
+        Assert.That(
+            actual: new CustomBooleanArray(array).Content,
+            expression: Is.EqualTo(array)
+        );
+    }
+
+
+    [Test]
+    public void LengthX_Initialization_ViaUserDefinedArray_TestCase_1()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new[,]
+                {
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false }
+                }).Length_X,
+            expression: Is.EqualTo(3)
+        );
+    }
+
+    [Test]
+    public void LengthX_Initialization_ViaUserDefinedArray_TestCase_2()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new[,]
+                {
+                    { false, false, false, false, false },
+                    { false, false, false, false, false },
+                    { false, false, false, false, false },
+                }).Length_X,
+            expression: Is.EqualTo(5)
+        );
+    }
+
+    [Test]
+    public void LengthY_Initialization_ViaUserDefinedArray_TestCase_1()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new[,]
+                {
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false }
+                }).Length_Y,
+            expression: Is.EqualTo(6)
+        );
+    }
+
+    [Test]
+    public void LengthXInitializationViaUserDefinedArray_TestCase_2()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new[,]
+                {
+                    { false, false, false, false, false },
+                    { false, false, false, false, false },
+                    { false, false, false, false, false },
+                }).Length_Y,
+            expression: Is.EqualTo(3)
+        );
+    }
 }

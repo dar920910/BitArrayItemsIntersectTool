@@ -15,6 +15,13 @@ public class CustomBooleanArray
         Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
     }
 
+    public CustomBooleanArray(bool[,] array)
+    {
+        Content = array;
+        Length_X = Content.GetLength(dimension: 1); // count of columns-items in the array
+        Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
+    }
+
     /// <summary>
     /// Generate a two-dimensional array with the specified dimensions.
     /// </summary>
