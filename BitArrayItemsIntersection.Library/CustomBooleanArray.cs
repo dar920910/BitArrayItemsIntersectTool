@@ -7,9 +7,10 @@ public class CustomBooleanArray
     public readonly int Length_X;
     public readonly int Length_Y;
 
-    public CustomBooleanArray(byte dimension_X, byte dimension_Y)
+    public CustomBooleanArray(byte dimension_X, byte dimension_Y,
+        bool elementPlaceholderValue = false)
     {
-        Content = CreateDefaultBooleanArray(dimension_X, dimension_Y);
+        Content = CreateDefaultBooleanArray(dimension_X, dimension_Y, elementPlaceholderValue);
 
         Length_X = Content.GetLength(dimension: 1); // count of columns-items in the array
         Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
@@ -30,7 +31,8 @@ public class CustomBooleanArray
     /// <param name="dimension_Y">Custom count of rows-elements 
     /// (Y axis locates elements from top to bottom)</param>
     /// <returns>Two-dimensional array with the specified dimensions.</returns>
-    private bool[,] CreateDefaultBooleanArray(byte dimension_X, byte dimension_Y)
+    private bool[,] CreateDefaultBooleanArray(byte dimension_X, byte dimension_Y,
+        bool elementPlaceholderValue)
     {
         var array = new bool[dimension_Y, dimension_X];
 
@@ -41,7 +43,7 @@ public class CustomBooleanArray
         {
             for (int index_Y = 0; index_Y < arrLength_Y; index_Y++)
             {
-                array[index_X, index_Y] = default;
+                array[index_X, index_Y] = elementPlaceholderValue;
             }
         }
 

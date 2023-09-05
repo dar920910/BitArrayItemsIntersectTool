@@ -10,7 +10,7 @@ public class CustomBooleanArrayTest
     }
 
     [Test]
-    public void TestContentByDefault_TestCase_1()
+    public void CreateBooleanArray_FilledByDefault_TestCase_1()
     {
         const byte dimensionLength_X = 3;
         const byte dimensionLength_Y = 3;
@@ -29,7 +29,7 @@ public class CustomBooleanArrayTest
     }
 
     [Test]
-    public void TestContentByDefault_TestCase_2()
+    public void CreateBooleanArray_FilledByDefault_TestCase_2()
     {
         Assert.That(
             actual: new CustomBooleanArray(
@@ -50,7 +50,7 @@ public class CustomBooleanArrayTest
     }
 
     [Test]
-    public void TestContentByDefault_TestCase_3()
+    public void CreateBooleanArray_FilledByDefault_TestCase_3()
     {
         Assert.That(
             actual: new CustomBooleanArray(
@@ -62,6 +62,132 @@ public class CustomBooleanArrayTest
                     { false, false, false, false, false, false, false },
                     { false, false, false, false, false, false, false },
                     { false, false, false, false, false, false, false }
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void CreateBooleanArray_FilledTrueValue_TestCase_1()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 3,
+                dimension_Y: 3,
+                elementPlaceholderValue: true
+            ).Content,
+            Is.EqualTo(
+                new[,]
+                {
+                    { true, true, true },
+                    { true, true, true },
+                    { true, true, true }
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void CreateBooleanArray_FilledTrueValue_TestCase_2()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 6,
+                dimension_Y: 3,
+                elementPlaceholderValue: true
+            ).Content,
+            Is.EqualTo(
+                new[,]
+                {
+                    { true, true, true, true, true, true },
+                    { true, true, true, true, true, true },
+                    { true, true, true, true, true, true }
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void CreateBooleanArray_FilledTrueValue_TestCase_3()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 3,
+                dimension_Y: 6,
+                elementPlaceholderValue: true
+            ).Content,
+            Is.EqualTo(
+                new[,]
+                {
+                    { true, true, true },
+                    { true, true, true },
+                    { true, true, true },
+                    { true, true, true },
+                    { true, true, true },
+                    { true, true, true }
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void CreateBooleanArray_FilledFalseValue_TestCase_1()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 3,
+                dimension_Y: 3,
+                elementPlaceholderValue: false
+            ).Content,
+            Is.EqualTo(
+                new[,]
+                {
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false }
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void CreateBooleanArray_FilledFalseValue_TestCase_2()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 6,
+                dimension_Y: 3,
+                elementPlaceholderValue: false
+            ).Content,
+            Is.EqualTo(
+                new[,]
+                {
+                    { false, false, false, false, false, false },
+                    { false, false, false, false, false, false },
+                    { false, false, false, false, false, false }
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void CreateBooleanArray_FilledFalseValue_TestCase_3()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 3,
+                dimension_Y: 6,
+                elementPlaceholderValue: false
+            ).Content,
+            Is.EqualTo(
+                new[,]
+                {
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false },
+                    { false, false, false }
                 }
             )
         );
