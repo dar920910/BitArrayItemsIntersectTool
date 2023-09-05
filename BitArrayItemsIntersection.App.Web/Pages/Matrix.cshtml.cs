@@ -7,7 +7,7 @@ public class MatrixModel : PageModel
 
     public MatrixModel()
     {
-        TargetArray = new CustomBooleanArray(DataStore.ArrayDimension_X, DataStore.ArrayDimension_Y);
+        TargetArray = CustomBooleanArray.GenerateRandomBooleanArray(DataStore.ArrayDimension_X, DataStore.ArrayDimension_Y);
     }
 
     public void OnGet()

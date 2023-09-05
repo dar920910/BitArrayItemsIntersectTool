@@ -30,6 +30,7 @@ public class CustomBooleanArray
     /// (X axis locates elements from left to right)</param>
     /// <param name="dimension_Y">Custom count of rows-elements 
     /// (Y axis locates elements from top to bottom)</param>
+    /// <param name="elementPlaceholderValue">Custom value of an element</param>
     /// <returns>Two-dimensional array with the specified dimensions.</returns>
     private bool[,] CreateDefaultBooleanArray(byte dimension_X, byte dimension_Y,
         bool elementPlaceholderValue)
@@ -48,5 +49,31 @@ public class CustomBooleanArray
         }
 
         return array;
+    }
+
+    public static CustomBooleanArray GenerateRandomBooleanArray(byte dimension_X, byte dimension_Y)
+    {
+        var array = new bool[dimension_Y, dimension_X];
+
+        int arrLength_X = array.GetLength(dimension: 0);
+        int arrLength_Y = array.GetLength(dimension: 1);
+
+        for (int index_X = 0; index_X < arrLength_X; index_X++)
+        {
+            for (int index_Y = 0; index_Y < arrLength_Y; index_Y++)
+            {
+                array[index_X, index_Y] = GenerateRandomBooleanValue();
+            }
+        }
+
+        return new CustomBooleanArray(array);
+    }
+
+    private static bool GenerateRandomBooleanValue()
+    {
+        return Random.Shared.Next(
+            minValue: int.MinValue,
+            maxValue: int.MaxValue
+        ) >= 0;
     }
 }
