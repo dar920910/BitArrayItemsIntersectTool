@@ -447,7 +447,7 @@ public class CustomBooleanArrayTest
     }
 
 
-        [Test]
+    [Test]
     public void FindAllNonChargedElements_TestCase_1()
     {
         Assert.That(
@@ -490,6 +490,227 @@ public class CustomBooleanArrayTest
                     new(row: 1, column: 1),
                     new(row: 2, column: 0),
                     new(row: 2, column: 2)
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindNeighbourElements_TopBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 1, 0 },
+                    { 0, 0, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 0, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 2),
+                    new(row: 1, column: 2),
+                    new(row: 1, column: 1),
+                    new(row: 1, column: 0),
+                    new(row: 0, column: 0)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_TopRightBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 1 },
+                    { 0, 0, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 0, elementColumn: 2),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 1, column: 2),
+                    new(row: 1, column: 1),
+                    new(row: 0, column: 1)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_RightBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 0, 1 },
+                    { 0, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 1, elementColumn: 2),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 2),
+                    new(row: 2, column: 2),
+                    new(row: 2, column: 1),
+                    new(row: 1, column: 1),
+                    new(row: 0, column: 1)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_BottomRightBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 0, 0 },
+                    { 0, 0, 1 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 2, elementColumn: 2),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 1, column: 2),
+                    new(row: 2, column: 1),
+                    new(row: 1, column: 1)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_BottomBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 0, 0 },
+                    { 0, 1, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 2, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 1, column: 1),
+                    new(row: 1, column: 2),
+                    new(row: 2, column: 2),
+                    new(row: 2, column: 0),
+                    new(row: 1, column: 0)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_BottomLeftBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 0, 0 },
+                    { 1, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 2, elementColumn: 0),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 1, column: 0),
+                    new(row: 1, column: 1),
+                    new(row: 2, column: 1)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_LeftBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 1, 0, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 1, elementColumn: 0),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 0),
+                    new(row: 0, column: 1),
+                    new(row: 1, column: 1),
+                    new(row: 2, column: 1),
+                    new(row: 2, column: 0)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_TopLeftBound_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 1, 0, 0 },
+                    { 0, 0, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 0, elementColumn: 0),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 1),
+                    new(row: 1, column: 1),
+                    new(row: 1, column: 0)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindNeighbourElements_WithinMatrix_TestCase()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 1, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindNeighbourElementsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 1),
+                    new(row: 0, column: 2),
+                    new(row: 1, column: 2),
+                    new(row: 2, column: 2),
+                    new(row: 2, column: 1),
+                    new(row: 2, column: 0),
+                    new(row: 1, column: 0),
+                    new(row: 0, column: 0)
                 }
             )
         );

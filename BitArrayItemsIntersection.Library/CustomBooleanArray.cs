@@ -69,6 +69,127 @@ public class CustomBooleanArray
     }
 
 
+    public List<BooleanElementInfo> FindNeighbourElementsAt(byte elementRow, byte elementColumn)
+    {
+        // 1. Check existing neighbour elements.
+        var neighbours = new NeighboursInfo();
+
+        if (IsOnLeftArrayBound(elementColumn))
+        {
+            neighbours.HasNeighbourOnBottomToLeft = false;
+            neighbours.HasNeighbourToLeft = false;
+            neighbours.HasNeighbourOnTopToLeft = false;
+        }
+
+        if (IsOnTopArrayBound(elementRow))
+        {
+            neighbours.HasNeighbourOnTopToLeft = false;
+            neighbours.HasNeighbourOnTop = false;
+            neighbours.HasNeighbourOnTopToRight = false;
+        }
+
+        if (IsOnRightArrayBound(elementColumn, CountOfColumns))
+        {
+            neighbours.HasNeighbourOnTopToRight = false;
+            neighbours.HasNeighbourToRight = false;
+            neighbours.HasNeighbourOnBottomToRight = false;
+        }
+
+        if (IsOnBottomArrayBound(elementRow, CountOfRows))
+        {
+            neighbours.HasNeighbourOnBottomToRight = false;
+            neighbours.HasNeighbourOnBottom = false;
+            neighbours.HasNeighbourOnBottomToLeft = false;
+        }
+
+        // 2. Evaluate info about existing neighbours.
+        List<BooleanElementInfo> neighbourElements = new();
+
+        if (neighbours.HasNeighbourOnTop)
+        {
+            byte neighbourRow = (byte)(elementRow - 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: neighbourRow, column: elementColumn,
+                charged: Content[neighbourRow, elementColumn]));
+        }
+
+        if (neighbours.HasNeighbourOnTopToRight)
+        {
+            byte neighbourRow = (byte)(elementRow - 1);
+            byte neighbourColumn = (byte)(elementColumn + 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: neighbourRow, column: neighbourColumn,
+                charged: Content[neighbourRow, neighbourColumn]));
+        }
+
+        if (neighbours.HasNeighbourToRight)
+        {
+            byte neighbourColumn = (byte)(elementColumn + 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: elementRow, column: neighbourColumn,
+                charged: Content[elementRow, neighbourColumn]));
+        }
+
+        if (neighbours.HasNeighbourOnBottomToRight)
+        {
+            byte neighbourRow = (byte)(elementRow + 1);
+            byte neighbourColumn = (byte)(elementColumn + 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: neighbourRow, column: neighbourColumn,
+                charged: Content[neighbourRow, neighbourColumn]));
+        }
+
+        if (neighbours.HasNeighbourOnBottom)
+        {
+            byte neighbourRow = (byte)(elementRow + 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: neighbourRow, column: elementColumn,
+                charged: Content[neighbourRow, elementColumn]));
+        }
+
+        if (neighbours.HasNeighbourOnBottomToLeft)
+        {
+            byte neighbourRow = (byte)(elementRow + 1);
+            byte neighbourColumn = (byte)(elementColumn - 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: neighbourRow, column: neighbourColumn,
+                charged: Content[neighbourRow, neighbourColumn]));
+        }
+
+        if (neighbours.HasNeighbourToLeft)
+        {
+            byte neighbourColumn = (byte)(elementColumn - 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: elementRow, column: neighbourColumn,
+                charged: Content[elementRow, neighbourColumn]));
+        }
+
+        if (neighbours.HasNeighbourOnTopToLeft)
+        {
+            byte neighbourRow = (byte)(elementRow - 1);
+            byte neighbourColumn = (byte)(elementColumn - 1);
+
+            neighbourElements.Add(new BooleanElementInfo(
+                row: neighbourRow, column: neighbourColumn,
+                charged: Content[neighbourRow, neighbourColumn]));
+        }
+
+        return neighbourElements;
+    }
+
+    private static bool IsOnLeftArrayBound(byte columnIndex) => columnIndex == 0;
+    private static bool IsOnTopArrayBound(byte rowIndex) => rowIndex == 0;
+    private static bool IsOnRightArrayBound(byte columnIndex, byte columns) => columnIndex == (columns - 1);
+    private static bool IsOnBottomArrayBound(byte rowIndex, byte rows) => rowIndex == (rows - 1);
+
+
     /// <summary>
     /// Generate a two-dimensional array with the specified dimensions.
     /// </summary>
@@ -152,5 +273,29 @@ public struct BooleanElementInfo
         Row = row;
         Column = column;
         IsCharged = charged;
+    }
+}
+
+public struct NeighboursInfo
+{
+    public bool HasNeighbourOnTop { get; set; }
+    public bool HasNeighbourOnTopToRight { get; set; }
+    public bool HasNeighbourToRight { get; set; }
+    public bool HasNeighbourOnBottomToRight { get; set; }
+    public bool HasNeighbourOnBottom { get; set; }
+    public bool HasNeighbourOnBottomToLeft { get; set; }
+    public bool HasNeighbourToLeft { get; set; }
+    public bool HasNeighbourOnTopToLeft { get; set; }
+
+    public NeighboursInfo()
+    {
+        HasNeighbourOnTop = true;
+        HasNeighbourOnTopToRight = true;
+        HasNeighbourToRight = true;
+        HasNeighbourOnBottomToRight = true;
+        HasNeighbourOnBottom = true;
+        HasNeighbourOnBottomToLeft = true;
+        HasNeighbourToLeft = true;
+        HasNeighbourOnTopToLeft = true;
     }
 }
