@@ -7,11 +7,19 @@ public class CustomBooleanArray
     public readonly byte CountOfRows;
     public readonly byte CountOfColumns;
 
+
     public CustomBooleanArray(byte rowsDimension, byte columnsDimension,
         bool hasChargedElements = false)
     {
-        Content = CreateDefaultBooleanArray(
-            rowsDimension, columnsDimension, hasChargedElements);
+        Content = new bool[rowsDimension, columnsDimension];
+
+        for (int row = 0; row < rowsDimension; row++)
+        {
+            for (int column = 0; column < columnsDimension; column++)
+            {
+                Content[row, column] = hasChargedElements;
+            }
+        }
 
         CountOfRows = Convert.ToByte(Content.GetLength(dimension: 0));
         CountOfColumns = Convert.ToByte(Content.GetLength(dimension: 1));
@@ -29,6 +37,24 @@ public class CustomBooleanArray
         Content = ConvertToBooleanArray(array);
         CountOfRows = Convert.ToByte(Content.GetLength(dimension: 0));
         CountOfColumns = Convert.ToByte(Content.GetLength(dimension: 1));
+    }
+
+    private static bool[,] ConvertToBooleanArray(int[,] integers)
+    {
+        int countOfRows = integers.GetLength(dimension: 0);
+        int countOfColumns = integers.GetLength(dimension: 1);
+
+        bool[,] array = new bool[countOfRows, countOfColumns];
+
+        for (int row = 0; row < countOfRows; row++)
+        {
+            for (int column = 0; column < countOfColumns; column++)
+            {
+                array[row, column] = integers[row, column] > 0;
+            }
+        }
+
+        return array;
     }
 
 
@@ -189,54 +215,6 @@ public class CustomBooleanArray
     private static bool IsOnRightArrayBound(byte columnIndex, byte columns) => columnIndex == (columns - 1);
     private static bool IsOnBottomArrayBound(byte rowIndex, byte rows) => rowIndex == (rows - 1);
 
-
-    /// <summary>
-    /// Generate a two-dimensional array with the specified dimensions.
-    /// </summary>
-    /// <param name="rows">Custom count of rows-elements</param>
-    /// <param name="columns">Custom count of columns-elements</param>
-    /// <param name="elementPlaceholderValue">Custom value of an element</param>
-    /// <returns>Two-dimensional array with the specified dimensions.</returns>
-    private bool[,] CreateDefaultBooleanArray(byte rows, byte columns, bool charged)
-    {
-        var array = new bool[rows, columns];
-
-        for (int row = 0; row < rows; row++)
-        {
-            for (int column = 0; column < columns; column++)
-            {
-                array[row, column] = charged;
-            }
-        }
-
-        return array;
-    }
-
-    /// <summary>
-    /// Convert an integer array to matching boolean array,
-    /// where positive elements are processed as True and
-    /// other elements are False (negative and 0).
-    /// </summary>
-    /// <param name="array">Array filled by integer values</param>
-    /// <returns>Matching two-dimensional boolean array</returns>
-    private bool[,] ConvertToBooleanArray(int[,] integers)
-    {
-        int countOfRows = integers.GetLength(dimension: 0);
-        int countOfColumns = integers.GetLength(dimension: 1);
-
-        bool[,] array = new bool[countOfRows, countOfColumns];
-
-        for (int row = 0; row < countOfRows; row++)
-        {
-            for (int column = 0; column < countOfColumns; column++)
-            {
-                array[row, column] = integers[row, column] > 0;
-            }
-        }
-
-        return array;
-    }
-
     public static CustomBooleanArray GenerateRandomBooleanArray(byte rows, byte columns)
     {
         var array = new bool[rows, columns];
@@ -261,7 +239,7 @@ public class CustomBooleanArray
     }
 }
 
-public struct BooleanElementInfo
+public readonly struct BooleanElementInfo
 {
     public readonly byte Row;
     public readonly byte Column;
