@@ -33,7 +33,7 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             actual: new CustomBooleanArray(
-                dimension_X: 7, dimension_Y: 4)
+                dimension_X: 4, dimension_Y: 7)
                     .Content,
             expression: Is.EqualTo(new bool[,]
                 {
@@ -54,7 +54,7 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             actual: new CustomBooleanArray(
-                dimension_X: 4, dimension_Y: 7)
+                dimension_X: 7, dimension_Y: 4)
                     .Content,
             expression: Is.EqualTo(new bool[,]
                 {
@@ -64,6 +64,55 @@ public class CustomBooleanArrayTest
                     { false, false, false, false, false, false, false }
                 }
             )
+        );
+    }
+
+
+    [Test]
+    public void TestArrayLengthX_TestCase_1()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 5,
+                dimension_Y: 2
+            ).Length_X,
+            Is.EqualTo(5)
+        );
+    }
+
+    [Test]
+    public void TestArrayLengthX_TestCase_2()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 3,
+                dimension_Y: 7
+            ).Length_X,
+            Is.EqualTo(3)
+        );
+    }
+
+    [Test]
+    public void TestArrayLengthY_TestCase_1()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 5,
+                dimension_Y: 2
+            ).Length_Y,
+            Is.EqualTo(2)
+        );
+    }
+
+    [Test]
+    public void TestArrayLengthY_TestCase_2()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                dimension_X: 3,
+                dimension_Y: 7
+            ).Length_Y,
+            Is.EqualTo(7)
         );
     }
 }

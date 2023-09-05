@@ -29,18 +29,15 @@ byte ReadCustomDimensionLength(string promptMessage)
 
 void PrintBooleanArray(CustomBooleanArray array)
 {
-    int arrLength_X = array.Content.GetLength(0);
-    int arrLength_Y = array.Content.GetLength(1);
-
     WriteLine("\nCustomBooleanArray: X = {0}, Y = {1}\n",
-        arrLength_X, arrLength_Y);
+        array.Length_X, array.Length_Y);
 
-    for (int index_X = 0; index_X < arrLength_X; index_X++)
+    for (int index_Y = 0; index_Y < array.Length_Y; index_Y++)
     {
-        for (int index_Y = 0; index_Y < arrLength_Y; index_Y++)
+        for (int index_X = 0; index_X < array.Length_X; index_X++)
         {
             WriteLine("array[ X: {0}, Y: {1} ] = {2}",
-                index_X, index_Y, array.Content[index_X, index_Y]);
+                index_X, index_Y, array.Content[index_Y, index_X]);
         }
 
         WriteLine();
