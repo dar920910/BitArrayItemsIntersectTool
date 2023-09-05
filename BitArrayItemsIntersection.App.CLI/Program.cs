@@ -2,8 +2,8 @@
 using static System.Console;
 
 CustomBooleanArray array = CreateUserDefinedArray(
-    dimension_X: ReadCustomDimensionLength("Input Array's Dimension X: "),
-    dimension_Y: ReadCustomDimensionLength("Input Array's Dimension Y: "),
+    rows: ReadCustomDimensionLength("Input Array's Rows Dimension: "),
+    columns: ReadCustomDimensionLength("Input Array's Columns Dimension: "),
     valueSelectionKeyInfo: ReadCustomValueSelectionKey()
 );
 
@@ -64,33 +64,35 @@ ConsoleKeyInfo ReadCustomValueSelectionKey()
     } while (true);
 }
 
-CustomBooleanArray CreateUserDefinedArray(byte dimension_X, byte dimension_Y,
+CustomBooleanArray CreateUserDefinedArray(byte rows, byte columns,
     ConsoleKeyInfo valueSelectionKeyInfo)
 {
     switch (valueSelectionKeyInfo.Key)
     {
         case ConsoleKey.R:
-            return CustomBooleanArray.GenerateRandomBooleanArray(dimension_X, dimension_Y);
+            return CustomBooleanArray.GenerateRandomBooleanArray(rows, columns);
         case ConsoleKey.F:
-            return new CustomBooleanArray(dimension_X, dimension_Y, false);
+            return new CustomBooleanArray(rows, columns,
+                hasChargedElements: false);
         case ConsoleKey.T:
-            return new CustomBooleanArray(dimension_X, dimension_Y, true);
+            return new CustomBooleanArray(rows, columns,
+                hasChargedElements: true);
         default:
-            return new CustomBooleanArray(dimension_X, dimension_Y);
+            return new CustomBooleanArray(rows, columns);
     }
 }
 
 void PrintBooleanArray(CustomBooleanArray array)
 {
     WriteLine("\nCustomBooleanArray: X = {0}, Y = {1}\n",
-        array.Length_X, array.Length_Y);
+        array.CountOfColumns, array.CountOfRows);
 
-    for (int index_Y = 0; index_Y < array.Length_Y; index_Y++)
+    for (byte row = 0; row < array.CountOfRows; row++)
     {
-        for (int index_X = 0; index_X < array.Length_X; index_X++)
+        for (byte column = 0; column < array.CountOfColumns; column++)
         {
             WriteLine("array[ X: {0}, Y: {1} ] = {2}",
-                index_X, index_Y, array.Content[index_Y, index_X]);
+                column, row, array.Content[row, column]);
         }
 
         WriteLine();

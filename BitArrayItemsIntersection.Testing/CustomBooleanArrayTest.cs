@@ -12,11 +12,10 @@ public class CustomBooleanArrayTest
     [Test]
     public void CreateBooleanArray_FilledByDefault_TestCase_1()
     {
-        const byte dimensionLength_X = 3;
-        const byte dimensionLength_Y = 3;
-
         bool[,] actualResult = new CustomBooleanArray(
-            dimensionLength_X, dimensionLength_Y).Content;
+            rowsDimension: 3,
+            columnsDimension: 3
+        ).Content;
 
         bool[,] expectedResult = new[,]
         {
@@ -33,8 +32,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             actual: new CustomBooleanArray(
-                dimension_X: 4, dimension_Y: 7)
-                    .Content,
+                rowsDimension: 7,
+                columnsDimension: 4
+            ).Content,
             expression: Is.EqualTo(new bool[,]
                 {
                     { false, false, false, false },
@@ -54,7 +54,8 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             actual: new CustomBooleanArray(
-                dimension_X: 7, dimension_Y: 4)
+                rowsDimension: 4,
+                columnsDimension: 7)
                     .Content,
             expression: Is.EqualTo(new bool[,]
                 {
@@ -72,9 +73,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 3,
-                dimension_Y: 3,
-                elementPlaceholderValue: true
+                rowsDimension: 3,
+                columnsDimension: 3,
+                hasChargedElements: true
             ).Content,
             Is.EqualTo(
                 new[,]
@@ -92,9 +93,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 6,
-                dimension_Y: 3,
-                elementPlaceholderValue: true
+                rowsDimension: 3,
+                columnsDimension: 6,
+                hasChargedElements: true
             ).Content,
             Is.EqualTo(
                 new[,]
@@ -112,9 +113,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 3,
-                dimension_Y: 6,
-                elementPlaceholderValue: true
+                rowsDimension: 6,
+                columnsDimension: 3,
+                hasChargedElements: true
             ).Content,
             Is.EqualTo(
                 new[,]
@@ -135,9 +136,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 3,
-                dimension_Y: 3,
-                elementPlaceholderValue: false
+                rowsDimension: 3,
+                columnsDimension: 3,
+                hasChargedElements: false
             ).Content,
             Is.EqualTo(
                 new[,]
@@ -155,9 +156,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 6,
-                dimension_Y: 3,
-                elementPlaceholderValue: false
+                rowsDimension: 3,
+                columnsDimension: 6,
+                hasChargedElements: false
             ).Content,
             Is.EqualTo(
                 new[,]
@@ -175,9 +176,9 @@ public class CustomBooleanArrayTest
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 3,
-                dimension_Y: 6,
-                elementPlaceholderValue: false
+                rowsDimension: 6,
+                columnsDimension: 3,
+                hasChargedElements: false
             ).Content,
             Is.EqualTo(
                 new[,]
@@ -195,56 +196,56 @@ public class CustomBooleanArrayTest
 
 
     [Test]
-    public void TestArrayLengthX_TestCase_1()
+    public void TestArrayColumns_TestCase_1()
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 5,
-                dimension_Y: 2
-            ).Length_X,
-            Is.EqualTo(5)
-        );
-    }
-
-    [Test]
-    public void TestArrayLengthX_TestCase_2()
-    {
-        Assert.That(
-            new CustomBooleanArray(
-                dimension_X: 3,
-                dimension_Y: 7
-            ).Length_X,
-            Is.EqualTo(3)
-        );
-    }
-
-    [Test]
-    public void TestArrayLengthY_TestCase_1()
-    {
-        Assert.That(
-            new CustomBooleanArray(
-                dimension_X: 5,
-                dimension_Y: 2
-            ).Length_Y,
+                rowsDimension: 5,
+                columnsDimension: 2
+            ).CountOfColumns,
             Is.EqualTo(2)
         );
     }
 
     [Test]
-    public void TestArrayLengthY_TestCase_2()
+    public void TestArrayColumns_TestCase_2()
     {
         Assert.That(
             new CustomBooleanArray(
-                dimension_X: 3,
-                dimension_Y: 7
-            ).Length_Y,
+                rowsDimension: 7,
+                columnsDimension: 3
+            ).CountOfColumns,
+            Is.EqualTo(3)
+        );
+    }
+
+    [Test]
+    public void TestArrayRows_TestCase_1()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                rowsDimension: 5,
+                columnsDimension: 2
+            ).CountOfRows,
+            Is.EqualTo(5)
+        );
+    }
+
+    [Test]
+    public void TestArrayRows_TestCase_2()
+    {
+        Assert.That(
+            new CustomBooleanArray(
+                rowsDimension: 7,
+                columnsDimension: 3
+            ).CountOfRows,
             Is.EqualTo(7)
         );
     }
 
 
     [Test]
-    public void Content_Initialization_ViaUserDefinedArray_TestCase_1()
+    public void ContentInitialization_ViaUserDefinedArray_TestCase_1()
     {
         bool[,] array = new[,]
         {
@@ -263,7 +264,7 @@ public class CustomBooleanArrayTest
     }
 
     [Test]
-    public void Content_Initialization_ViaUserDefinedArray_TestCase_2()
+    public void ContentInitialization_ViaUserDefinedArray_TestCase_2()
     {
         bool[,] array = new[,]
         {
@@ -280,7 +281,7 @@ public class CustomBooleanArrayTest
 
 
     [Test]
-    public void LengthX_Initialization_ViaUserDefinedArray_TestCase_1()
+    public void ColumnsInitialization_ViaUserDefinedArray_TestCase_1()
     {
         Assert.That(
             actual: new CustomBooleanArray(new[,]
@@ -291,13 +292,13 @@ public class CustomBooleanArrayTest
                     { false, false, false },
                     { false, false, false },
                     { false, false, false }
-                }).Length_X,
+                }).CountOfColumns,
             expression: Is.EqualTo(3)
         );
     }
 
     [Test]
-    public void LengthX_Initialization_ViaUserDefinedArray_TestCase_2()
+    public void ColumnsInitialization_ViaUserDefinedArray_TestCase_2()
     {
         Assert.That(
             actual: new CustomBooleanArray(new[,]
@@ -305,13 +306,13 @@ public class CustomBooleanArrayTest
                     { false, false, false, false, false },
                     { false, false, false, false, false },
                     { false, false, false, false, false },
-                }).Length_X,
+                }).CountOfColumns,
             expression: Is.EqualTo(5)
         );
     }
 
     [Test]
-    public void LengthY_Initialization_ViaUserDefinedArray_TestCase_1()
+    public void RowsInitialization_ViaUserDefinedArray_TestCase_1()
     {
         Assert.That(
             actual: new CustomBooleanArray(new[,]
@@ -322,13 +323,13 @@ public class CustomBooleanArrayTest
                     { false, false, false },
                     { false, false, false },
                     { false, false, false }
-                }).Length_Y,
+                }).CountOfRows,
             expression: Is.EqualTo(6)
         );
     }
 
     [Test]
-    public void LengthXInitializationViaUserDefinedArray_TestCase_2()
+    public void RowsInitializationViaUserDefinedArray_TestCase_2()
     {
         Assert.That(
             actual: new CustomBooleanArray(new[,]
@@ -336,7 +337,7 @@ public class CustomBooleanArrayTest
                     { false, false, false, false, false },
                     { false, false, false, false, false },
                     { false, false, false, false, false },
-                }).Length_Y,
+                }).CountOfRows,
             expression: Is.EqualTo(3)
         );
     }
@@ -397,18 +398,100 @@ public class CustomBooleanArrayTest
     }
 
 
-/*
     [Test]
     public void FindAllChargedElements_TestCase_1()
     {
-        bool[,] array = new[,]
-        {
-            { false, false, false, false, false },
-            { false, true, false, false, false },
-            { false, false, true, false, false },
-            { false, false, false, true, false },
-            { false, false, false, false, true }
-        };
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 1, 0, 1 },
+                    { 0, 1, 0 },
+                    { 1, 0, 1 }
+                }
+            ).FindAllChargedElements(),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 0, charged: true),
+                    new(row: 0, column: 2, charged: true),
+                    new(row: 1, column: 1, charged: true),
+                    new(row: 2, column: 0, charged: true),
+                    new(row: 2, column: 2, charged: true)
+                }
+            )
+        );
     }
-*/
+
+    [Test]
+    public void FindAllChargedElements_TestCase_2()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 1, 0 },
+                    { 1, 0, 1 },
+                    { 0, 1, 0 }
+                }
+            ).FindAllChargedElements(),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 1, charged: true),
+                    new(row: 1, column: 0, charged: true),
+                    new(row: 1, column: 2, charged: true),
+                    new(row: 2, column: 1, charged: true)
+                }
+            )
+        );
+    }
+
+
+        [Test]
+    public void FindAllNonChargedElements_TestCase_1()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(new int[,]
+                {
+                    { 1, 0, 1 },
+                    { 0, 1, 0 },
+                    { 1, 0, 1 }
+                }
+            ).FindAllNonChargedElements(),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 1),
+                    new(row: 1, column: 0),
+                    new(row: 1, column: 2),
+                    new(row: 2, column: 1)
+                }
+            )
+        );
+    }
+
+    [Test]
+    public void FindAllNonChargedElements_TestCase_2()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 1, 0 },
+                    { 1, 0, 1 },
+                    { 0, 1, 0 }
+                }
+            ).FindAllNonChargedElements(),
+            expression: Is.EqualTo(
+                new List<BooleanElementInfo>()
+                {
+                    new(row: 0, column: 0),
+                    new(row: 0, column: 2),
+                    new(row: 1, column: 1),
+                    new(row: 2, column: 0),
+                    new(row: 2, column: 2)
+                }
+            )
+        );
+    }
 }

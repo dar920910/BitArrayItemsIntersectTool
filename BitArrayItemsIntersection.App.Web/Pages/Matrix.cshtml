@@ -5,19 +5,19 @@
     <h1 class="display-2">This is a New Matrix: </h1>
     <h2>
         This Matrix has the following dimensions:
-        X = @Model.TargetArray.Length_X, Y = @Model.TargetArray.Length_Y
+        X = @Model.TargetArray.CountOfColumns, Y = @Model.TargetArray.CountOfRows
     </h2>
     <a class="btn btn-primary" href="/">Return to Home Page</a>
     <table class="table">
         <tbody>
         @if (Model.TargetArray.Content is not null)
         {
-            @for (int @index_Y = 0; @index_Y < @Model.TargetArray.Length_Y; @index_Y++)
+            @for (byte @row = 0; @row < @Model.TargetArray.CountOfRows; @row++)
             {
                 <tr>
-                @for (int @index_X = 0; @index_X < @Model.TargetArray.Length_X; @index_X++)
+                @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
                 {
-                    <td>@Model.TargetArray.Content[@index_Y, @index_X]</td>
+                    <td>@Model.TargetArray.Content[@row, @column]</td>
                 }
                 </tr>
             }

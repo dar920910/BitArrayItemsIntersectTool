@@ -4,54 +4,87 @@ public class CustomBooleanArray
 {
     public bool[,] Content { get; }
 
-    public readonly int Length_X;
-    public readonly int Length_Y;
+    public readonly byte CountOfRows;
+    public readonly byte CountOfColumns;
 
-    public CustomBooleanArray(byte dimension_X, byte dimension_Y,
-        bool elementPlaceholderValue = false)
+    public CustomBooleanArray(byte rowsDimension, byte columnsDimension,
+        bool hasChargedElements = false)
     {
-        Content = CreateDefaultBooleanArray(dimension_X, dimension_Y, elementPlaceholderValue);
+        Content = CreateDefaultBooleanArray(
+            rowsDimension, columnsDimension, hasChargedElements);
 
-        Length_X = Content.GetLength(dimension: 1); // count of columns-items in the array
-        Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
+        CountOfRows = Convert.ToByte(Content.GetLength(dimension: 0));
+        CountOfColumns = Convert.ToByte(Content.GetLength(dimension: 1));
     }
 
     public CustomBooleanArray(bool[,] array)
     {
         Content = array;
-        Length_X = Content.GetLength(dimension: 1); // count of columns-items in the array
-        Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
+        CountOfRows = Convert.ToByte(Content.GetLength(dimension: 0));
+        CountOfColumns = Convert.ToByte(Content.GetLength(dimension: 1));
     }
 
     public CustomBooleanArray(int[,] array)
     {
         Content = ConvertToBooleanArray(array);
-        Length_X = Content.GetLength(dimension: 1); // count of columns-items in the array
-        Length_Y = Content.GetLength(dimension: 0); // count of rows-items in the array
+        CountOfRows = Convert.ToByte(Content.GetLength(dimension: 0));
+        CountOfColumns = Convert.ToByte(Content.GetLength(dimension: 1));
     }
+
+
+    public List<BooleanElementInfo> FindAllChargedElements()
+    {
+        var elements = new List<BooleanElementInfo>();
+
+        for (byte row = 0; row < CountOfRows; row++)
+        {
+            for (byte column = 0; column < CountOfColumns; column++)
+            {
+                if (Content[row, column] is true)
+                {
+                    elements.Add(new BooleanElementInfo(row, column, charged: true));
+                }
+            }
+        }
+
+        return elements;
+    }
+
+    public List<BooleanElementInfo> FindAllNonChargedElements()
+    {
+        var elements = new List<BooleanElementInfo>();
+
+        for (byte row = 0; row < CountOfRows; row++)
+        {
+            for (byte column = 0; column < CountOfColumns; column++)
+            {
+                if (Content[row, column] is false)
+                {
+                    elements.Add(new BooleanElementInfo(row, column));
+                }
+            }
+        }
+
+        return elements;
+    }
+
 
     /// <summary>
     /// Generate a two-dimensional array with the specified dimensions.
     /// </summary>
-    /// <param name="dimension_X">Custom count of columns-elements 
-    /// (X axis locates elements from left to right)</param>
-    /// <param name="dimension_Y">Custom count of rows-elements 
-    /// (Y axis locates elements from top to bottom)</param>
+    /// <param name="rows">Custom count of rows-elements</param>
+    /// <param name="columns">Custom count of columns-elements</param>
     /// <param name="elementPlaceholderValue">Custom value of an element</param>
     /// <returns>Two-dimensional array with the specified dimensions.</returns>
-    private bool[,] CreateDefaultBooleanArray(byte dimension_X, byte dimension_Y,
-        bool elementPlaceholderValue)
+    private bool[,] CreateDefaultBooleanArray(byte rows, byte columns, bool charged)
     {
-        var array = new bool[dimension_Y, dimension_X];
+        var array = new bool[rows, columns];
 
-        int arrLength_X = array.GetLength(dimension: 0); // columns are on the X axis
-        int arrLength_Y = array.GetLength(dimension: 1); // rows are on the Y axis
-
-        for (int index_X = 0; index_X < arrLength_X; index_X++)
+        for (int row = 0; row < rows; row++)
         {
-            for (int index_Y = 0; index_Y < arrLength_Y; index_Y++)
+            for (int column = 0; column < columns; column++)
             {
-                array[index_X, index_Y] = elementPlaceholderValue;
+                array[row, column] = charged;
             }
         }
 
@@ -83,18 +116,15 @@ public class CustomBooleanArray
         return array;
     }
 
-    public static CustomBooleanArray GenerateRandomBooleanArray(byte dimension_X, byte dimension_Y)
+    public static CustomBooleanArray GenerateRandomBooleanArray(byte rows, byte columns)
     {
-        var array = new bool[dimension_Y, dimension_X];
+        var array = new bool[rows, columns];
 
-        int arrLength_X = array.GetLength(dimension: 0);
-        int arrLength_Y = array.GetLength(dimension: 1);
-
-        for (int index_X = 0; index_X < arrLength_X; index_X++)
+        for (byte row = 0; row < rows; row++)
         {
-            for (int index_Y = 0; index_Y < arrLength_Y; index_Y++)
+            for (byte column = 0; column < columns; column++)
             {
-                array[index_X, index_Y] = GenerateRandomBooleanValue();
+                array[row, column] = GenerateRandomBooleanValue();
             }
         }
 
@@ -107,5 +137,20 @@ public class CustomBooleanArray
             minValue: int.MinValue,
             maxValue: int.MaxValue
         ) >= 0;
+    }
+}
+
+public struct BooleanElementInfo
+{
+    public readonly byte Row;
+    public readonly byte Column;
+    public readonly bool IsCharged;
+
+    public BooleanElementInfo(byte row, byte column, 
+        bool charged = false)
+    {
+        Row = row;
+        Column = column;
+        IsCharged = charged;
     }
 }
