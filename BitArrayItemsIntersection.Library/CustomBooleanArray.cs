@@ -215,6 +215,42 @@ public class CustomBooleanArray
     private static bool IsOnRightArrayBound(byte columnIndex, byte columns) => columnIndex == (columns - 1);
     private static bool IsOnBottomArrayBound(byte rowIndex, byte rows) => rowIndex == (rows - 1);
 
+
+    public List<ItemsIntersectionInfo> FindItemsIntersectionsAt(byte elementRow, byte elementColumn,
+        bool hasNonChargedNodeItems = false)
+    {
+        List<ItemsIntersectionInfo> intersections = new();
+
+        foreach (BooleanElementInfo neighbour in FindNeighbourElementsAt(elementRow, elementColumn))
+        {
+            if (hasNonChargedNodeItems)
+            {
+                if (neighbour.IsCharged is false)
+                {
+                    intersections.Add(new ItemsIntersectionInfo(
+                        firstNodeItem: new BooleanElementInfo(elementRow, elementColumn),
+                        lastNodeItem: new BooleanElementInfo(neighbour.Row, neighbour.Column)
+                    ));
+                }
+            }
+            else
+            {
+                if (neighbour.IsCharged)
+                {
+                    intersections.Add(new ItemsIntersectionInfo(
+                        firstNodeItem: new BooleanElementInfo(
+                            elementRow, elementColumn, charged: true),
+                        lastNodeItem: new BooleanElementInfo(
+                            neighbour.Row, neighbour.Column, charged: true)
+                    ));
+                }
+            }
+        }
+
+        return intersections;
+    }
+
+
     public static CustomBooleanArray GenerateRandomBooleanArray(byte rows, byte columns)
     {
         var array = new bool[rows, columns];
@@ -275,5 +311,19 @@ public struct NeighboursInfo
         HasNeighbourOnBottomToLeft = true;
         HasNeighbourToLeft = true;
         HasNeighbourOnTopToLeft = true;
+    }
+}
+
+public record ItemsIntersectionInfo
+{
+    public readonly BooleanElementInfo FirstNode;
+    public readonly BooleanElementInfo LastNode;
+
+    public ItemsIntersectionInfo(
+        BooleanElementInfo firstNodeItem,
+        BooleanElementInfo lastNodeItem)
+    {
+        FirstNode = firstNodeItem;
+        LastNode = lastNodeItem;
     }
 }

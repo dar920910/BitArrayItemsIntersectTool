@@ -715,4 +715,711 @@ public class CustomBooleanArrayTest
             )
         );
     }
+
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnTopIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 1, 0 },
+                    { 0, 1, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 1, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnTopIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 0, 1 },
+                    { 1, 0, 1 },
+                    { 1, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 1
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnTopToRightIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 1 },
+                    { 0, 1, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 2, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnTopToRightIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 0 },
+                    { 1, 0, 1 },
+                    { 1, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 2
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_ToRightIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 1, 1 },
+                    { 0, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 2, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_ToRightIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 1 },
+                    { 1, 0, 0 },
+                    { 1, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 2
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnBottomToRightIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 1, 0 },
+                    { 0, 0, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 2, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnBottomToRightIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 1 },
+                    { 1, 0, 1 },
+                    { 1, 1, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 2
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnBottomIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 1, 0 },
+                    { 0, 1, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 1, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnBottomIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 1 },
+                    { 1, 0, 1 },
+                    { 1, 0, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 1
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnBottomToLeftIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 1, 0 },
+                    { 1, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 0, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnBottomToLeftIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 1 },
+                    { 1, 0, 1 },
+                    { 0, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 0
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_ToLeftIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 1, 1, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 0, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_ToLeftIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 1 },
+                    { 0, 0, 1 },
+                    { 1, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 0
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnTopToLeftIntersection_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 0, 0 },
+                    { 0, 1, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 0, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_OnTopToLeftIntersection_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 1, 1 },
+                    { 1, 0, 1 },
+                    { 1, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 0
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_ManyIntersections_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 0, 1 },
+                    { 0, 1, 0 },
+                    { 1, 0, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 2, charged: true
+                        )
+                    ),
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 2, charged: true
+                        )
+                    ),
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 0, charged: true
+                        )
+                    ),
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1, charged: true
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 0, charged: true
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_ManyIntersections_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 0, 1 },
+                    { 0, 0, 0 },
+                    { 1, 0, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(
+                new List<ItemsIntersectionInfo>()
+                {
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 0, column: 1
+                        )
+                    ),
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 2
+                        )
+                    ),
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 2, column: 1
+                        )
+                    ),
+                    new
+                    (
+                        firstNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 1
+                        ),
+                        lastNodeItem: new BooleanElementInfo
+                        (
+                            row: 1, column: 0
+                        )
+                    )
+                }
+            )
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_NoIntersections_TrueToTrue()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 0, 0, 0 },
+                    { 0, 1, 0 },
+                    { 0, 0, 0 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1),
+            expression: Is.EqualTo(new List<ItemsIntersectionInfo>())
+        );
+    }
+
+
+    [Test]
+    public void FindItemsIntersectionsTest_NoIntersections_FalseToFalse()
+    {
+        Assert.That(
+            actual: new CustomBooleanArray(
+                new int[,]
+                {
+                    { 1, 1, 1 },
+                    { 1, 0, 1 },
+                    { 1, 1, 1 }
+                }
+            ).FindItemsIntersectionsAt(
+                elementRow: 1, elementColumn: 1,
+                hasNonChargedNodeItems: true),
+            expression: Is.EqualTo(new List<ItemsIntersectionInfo>())
+        );
+    }
 }
