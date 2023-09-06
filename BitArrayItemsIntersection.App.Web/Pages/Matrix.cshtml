@@ -14,10 +14,11 @@
         {
             @for (byte @row = 0; @row < @Model.TargetArray.CountOfRows; @row++)
             {
-                <tr>
+                <tr style="back">
                 @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
                 {
-                    <td>@Model.TargetArray.Content[@row, @column]</td>
+                    bool @elementCharge = @Model.TargetArray.Content[@row, @column];
+                    <td  class="@MatrixModel.GetElementClass(@elementCharge)">@elementCharge</td>
                 }
                 </tr>
             }

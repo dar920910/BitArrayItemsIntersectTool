@@ -1,0 +1,12 @@
+
+td.charged {
+    color: black;
+    font-weight: bolder;
+    background-color: lightgreen;
+}
+
+td.noncharged {
+    color: black;
+    font-weight: normal;
+    background-color: lightcoral;
+}

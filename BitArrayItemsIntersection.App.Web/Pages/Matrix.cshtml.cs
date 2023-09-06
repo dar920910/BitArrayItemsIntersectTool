@@ -17,4 +17,9 @@ public class MatrixModel : PageModel
     {
         ViewData["Title"] = "Target Matrix";
     }
+
+    public static string GetElementClass(bool elementValue)
+    {
+        return elementValue ? "charged" : "noncharged";
+    }
 }
