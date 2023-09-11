@@ -96,9 +96,12 @@ public class CustomBooleanArray
 
 
     public List<BooleanElementInfo> FindNeighbourElementsAt(byte elementRow, byte elementColumn)
+         => GetNeighboursElementsAt(elementRow, elementColumn,
+                neighboursInfo: InitializeNeighboursInfoAt(elementRow, elementColumn));
+
+    private NeighboursInfo InitializeNeighboursInfoAt(byte elementRow, byte elementColumn)
     {
-        // 1. Check existing neighbour elements.
-        var neighbours = new NeighboursInfo();
+        NeighboursInfo neighbours = new();
 
         if (IsOnLeftArrayBound(elementColumn))
         {
@@ -128,10 +131,19 @@ public class CustomBooleanArray
             neighbours.HasNeighbourOnBottomToLeft = false;
         }
 
-        // 2. Evaluate info about existing neighbours.
+        return neighbours;
+    }
+
+    private static bool IsOnLeftArrayBound(byte columnIndex) => columnIndex == 0;
+    private static bool IsOnTopArrayBound(byte rowIndex) => rowIndex == 0;
+    private static bool IsOnRightArrayBound(byte columnIndex, byte columns) => columnIndex == (columns - 1);
+    private static bool IsOnBottomArrayBound(byte rowIndex, byte rows) => rowIndex == (rows - 1);
+
+    private List<BooleanElementInfo> GetNeighboursElementsAt(byte elementRow, byte elementColumn, NeighboursInfo neighboursInfo)
+    {
         List<BooleanElementInfo> neighbourElements = new();
 
-        if (neighbours.HasNeighbourOnTop)
+        if (neighboursInfo.HasNeighbourOnTop)
         {
             byte neighbourRow = (byte)(elementRow - 1);
 
@@ -140,7 +152,7 @@ public class CustomBooleanArray
                 charged: Content[neighbourRow, elementColumn]));
         }
 
-        if (neighbours.HasNeighbourOnTopToRight)
+        if (neighboursInfo.HasNeighbourOnTopToRight)
         {
             byte neighbourRow = (byte)(elementRow - 1);
             byte neighbourColumn = (byte)(elementColumn + 1);
@@ -150,7 +162,7 @@ public class CustomBooleanArray
                 charged: Content[neighbourRow, neighbourColumn]));
         }
 
-        if (neighbours.HasNeighbourToRight)
+        if (neighboursInfo.HasNeighbourToRight)
         {
             byte neighbourColumn = (byte)(elementColumn + 1);
 
@@ -159,7 +171,7 @@ public class CustomBooleanArray
                 charged: Content[elementRow, neighbourColumn]));
         }
 
-        if (neighbours.HasNeighbourOnBottomToRight)
+        if (neighboursInfo.HasNeighbourOnBottomToRight)
         {
             byte neighbourRow = (byte)(elementRow + 1);
             byte neighbourColumn = (byte)(elementColumn + 1);
@@ -169,7 +181,7 @@ public class CustomBooleanArray
                 charged: Content[neighbourRow, neighbourColumn]));
         }
 
-        if (neighbours.HasNeighbourOnBottom)
+        if (neighboursInfo.HasNeighbourOnBottom)
         {
             byte neighbourRow = (byte)(elementRow + 1);
 
@@ -178,7 +190,7 @@ public class CustomBooleanArray
                 charged: Content[neighbourRow, elementColumn]));
         }
 
-        if (neighbours.HasNeighbourOnBottomToLeft)
+        if (neighboursInfo.HasNeighbourOnBottomToLeft)
         {
             byte neighbourRow = (byte)(elementRow + 1);
             byte neighbourColumn = (byte)(elementColumn - 1);
@@ -188,7 +200,7 @@ public class CustomBooleanArray
                 charged: Content[neighbourRow, neighbourColumn]));
         }
 
-        if (neighbours.HasNeighbourToLeft)
+        if (neighboursInfo.HasNeighbourToLeft)
         {
             byte neighbourColumn = (byte)(elementColumn - 1);
 
@@ -197,7 +209,7 @@ public class CustomBooleanArray
                 charged: Content[elementRow, neighbourColumn]));
         }
 
-        if (neighbours.HasNeighbourOnTopToLeft)
+        if (neighboursInfo.HasNeighbourOnTopToLeft)
         {
             byte neighbourRow = (byte)(elementRow - 1);
             byte neighbourColumn = (byte)(elementColumn - 1);
@@ -209,11 +221,6 @@ public class CustomBooleanArray
 
         return neighbourElements;
     }
-
-    private static bool IsOnLeftArrayBound(byte columnIndex) => columnIndex == 0;
-    private static bool IsOnTopArrayBound(byte rowIndex) => rowIndex == 0;
-    private static bool IsOnRightArrayBound(byte columnIndex, byte columns) => columnIndex == (columns - 1);
-    private static bool IsOnBottomArrayBound(byte rowIndex, byte rows) => rowIndex == (rows - 1);
 
 
     public List<ItemsIntersectionInfo> FindItemsIntersectionsAt(byte elementRow, byte elementColumn,
@@ -248,6 +255,86 @@ public class CustomBooleanArray
         }
 
         return intersections;
+    }
+
+
+    public BooleanElementInfo[] FindShortestPathBetweenElements(
+        BooleanElementInfo startElement, BooleanElementInfo endElement)
+    {
+        LinkedList<BooleanElementInfo> shortestPath = new();
+
+        shortestPath.AddFirst(new LinkedListNode<BooleanElementInfo>(startElement));
+        shortestPath.AddLast(new LinkedListNode<BooleanElementInfo>(endElement));
+
+        BooleanElementInfo currentElement = startElement;
+        while (currentElement.Equals(endElement) is false)
+        {
+            List<BooleanElementInfo> neighbours = FindPossibleNeighbourPathElements(currentElement, startElement);
+            BooleanElementInfo nextElement = FindNextPathElement(neighbours, endElement);
+
+            if (nextElement.Equals(endElement))
+            {
+                break;
+            }
+
+            shortestPath.AddBefore(node: shortestPath.Last, value: nextElement);
+            currentElement = nextElement;
+        }
+
+        return shortestPath.ToArray();
+    }
+
+    private List<BooleanElementInfo> FindPossibleNeighbourPathElements(BooleanElementInfo elementInfo, BooleanElementInfo pathStartElement)
+    {
+        List<BooleanElementInfo> possiblePathElements = new();
+
+        List<BooleanElementInfo> neighbourElements = GetNeighboursElementsAt(
+            elementRow: elementInfo.Row, elementColumn: elementInfo.Column,
+            neighboursInfo: InitializeNeighboursInfoAt(elementInfo.Row, elementInfo.Column));
+
+        foreach (BooleanElementInfo element in neighbourElements)
+        {
+            if (element.Equals(pathStartElement))
+            {
+                continue;
+            }
+
+            if (element.IsCharged)
+            {
+                possiblePathElements.Add(element);
+            }
+        }
+
+        return possiblePathElements;
+    }
+
+    private BooleanElementInfo FindNextPathElement(List<BooleanElementInfo> possiblePathElements, BooleanElementInfo pathEndElement)
+    {
+        int shortestPathLengthByRow = int.MaxValue;
+        int shortestPathLengthByCol = int.MaxValue;
+
+        byte nextPathRowIndex = pathEndElement.Row;
+        byte nextPathColIndex = pathEndElement.Column;
+
+        foreach (BooleanElementInfo pathElement in possiblePathElements)
+        {
+            int pathLengthByRow = (pathEndElement.Row < pathElement.Row) ?
+                (pathElement.Row - pathEndElement.Row) : (pathEndElement.Row - pathElement.Row);
+
+            int pathLengthByCol = (pathEndElement.Column < pathElement.Column) ?
+                (pathElement.Column - pathEndElement.Column) : (pathEndElement.Column - pathElement.Column);
+
+            if ( (pathLengthByRow <= shortestPathLengthByRow) && (pathLengthByCol <= shortestPathLengthByCol) )
+            {
+                shortestPathLengthByRow = pathLengthByRow;
+                shortestPathLengthByCol = pathLengthByCol;
+
+                nextPathRowIndex = pathElement.Row;
+                nextPathColIndex = pathElement.Column;
+            }
+        }
+
+        return new BooleanElementInfo(nextPathRowIndex, nextPathColIndex, Content[nextPathRowIndex, nextPathColIndex]);
     }
 
 
