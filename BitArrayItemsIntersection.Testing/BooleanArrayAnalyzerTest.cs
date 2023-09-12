@@ -1,6 +1,3 @@
-#define SHORTEST_ROUTE_IMPL
-#undef SHORTEST_ROUTE_IMPL
-
 using BitArrayItemsIntersection.Library;
 
 namespace BitArrayItemsIntersection.Testing;
@@ -828,9 +825,9 @@ public class BooleanArrayAnalyzerTest
     }
 
 
-#if SHORTEST_ROUTE_IMPL
+
     [Test]
-    public void FindShortestRouteBetween_FromTopLeft_ToBottomRight()
+    public void FindShortestRouteBetween_FromTopLeft_ToBottomRight_TestCase_1()
     {
         CustomBooleanArray array = new(
             new int[,]
@@ -841,20 +838,18 @@ public class BooleanArrayAnalyzerTest
             }
         );
 
-        BooleanElementInfo[] actualPath = new BooleanArrayAnalyzer(array)
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
             .FindShortestRouteBetween(
                 routeSource: (Row: 0, Col: 0),
                 routeTarget: (Row: 2, Col: 2));
 
-        BooleanElementInfo[] expectedPath = 
+        Assert.That(actualResult, Is.EqualTo(new BooleanElementInfo[] 
         {
             new(row: 0, column: 0, charged: true),
             new(row: 0, column: 1, charged: true),
             new(row: 1, column: 2, charged: true),
             new(row: 2, column: 2, charged: true)
-        };
-
-        Assert.That(actualPath, Is.EqualTo(expectedPath));
+        }));
     }
 
     [Test]
@@ -869,19 +864,378 @@ public class BooleanArrayAnalyzerTest
             }
         );
 
-        BooleanElementInfo[] actualPath = new BooleanArrayAnalyzer(array)
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
             .FindShortestRouteBetween(
                 routeSource: (Row: 2, Col: 0),
                 routeTarget: (Row: 0, Col: 2));
 
-        BooleanElementInfo[] expectedPath = 
+        Assert.That(actualResult, Is.EqualTo(new BooleanElementInfo[]
         {
             new(row: 2, column: 0, charged: true),
             new(row: 1, column: 1, charged: true),
             new(row: 0, column: 2, charged: true)
+        }));
+    }
+
+
+
+    [Test]
+    public void FindShortestRouteBetween_FromTopLeft_ToTopRight()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 0),
+                routeTarget: (Row: 0, Col: 4));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 0, column: 0, charged: true),
+            new(row: 0, column: 1, charged: true),
+            new(row: 0, column: 2, charged: true),
+            new(row: 0, column: 3, charged: true),
+            new(row: 0, column: 4, charged: true)
         };
 
-        Assert.That(actualPath, Is.EqualTo(expectedPath));
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
     }
-#endif
+
+    [Test]
+    public void FindShortestRouteBetween_FromTopLeft_ToBottomRight()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 0),
+                routeTarget: (Row: 4, Col: 4));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 0, column: 0, charged: true),
+            new(row: 1, column: 1, charged: true),
+            new(row: 2, column: 2, charged: true),
+            new(row: 3, column: 3, charged: true),
+            new(row: 4, column: 4, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromTopLeft_ToBottomLeft()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 0),
+                routeTarget: (Row: 4, Col: 0));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 0, column: 0, charged: true),
+            new(row: 1, column: 0, charged: true),
+            new(row: 2, column: 0, charged: true),
+            new(row: 3, column: 0, charged: true),
+            new(row: 4, column: 0, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromTopRight_ToBottomRight()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 4),
+                routeTarget: (Row: 4, Col: 4));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 0, column: 4, charged: true),
+            new(row: 1, column: 4, charged: true),
+            new(row: 2, column: 4, charged: true),
+            new(row: 3, column: 4, charged: true),
+            new(row: 4, column: 4, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromTopRight_ToBottomLeft()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 4),
+                routeTarget: (Row: 4, Col: 0));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 0, column: 4, charged: true),
+            new(row: 1, column: 3, charged: true),
+            new(row: 2, column: 2, charged: true),
+            new(row: 3, column: 1, charged: true),
+            new(row: 4, column: 0, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromTopRight_ToTopLeft()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 4),
+                routeTarget: (Row: 0, Col: 0));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 0, column: 4, charged: true),
+            new(row: 0, column: 3, charged: true),
+            new(row: 0, column: 2, charged: true),
+            new(row: 0, column: 1, charged: true),
+            new(row: 0, column: 0, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromBottomRight_ToBottomLeft()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 4, Col: 4),
+                routeTarget: (Row: 4, Col: 0));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 4, column: 4, charged: true),
+            new(row: 4, column: 3, charged: true),
+            new(row: 4, column: 2, charged: true),
+            new(row: 4, column: 1, charged: true),
+            new(row: 4, column: 0, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromBottomRight_ToTopLeft()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 4, Col: 4),
+                routeTarget: (Row: 0, Col: 0));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 4, column: 4, charged: true),
+            new(row: 3, column: 3, charged: true),
+            new(row: 2, column: 2, charged: true),
+            new(row: 1, column: 1, charged: true),
+            new(row: 0, column: 0, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromBottomRight_ToTopRight()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 4, Col: 4),
+                routeTarget: (Row: 0, Col: 4));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 4, column: 4, charged: true),
+            new(row: 3, column: 4, charged: true),
+            new(row: 2, column: 4, charged: true),
+            new(row: 1, column: 4, charged: true),
+            new(row: 0, column: 4, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromBottomLeft_ToTopLeft()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 4, Col: 0),
+                routeTarget: (Row: 0, Col: 0));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 4, column: 0, charged: true),
+            new(row: 3, column: 0, charged: true),
+            new(row: 2, column: 0, charged: true),
+            new(row: 1, column: 0, charged: true),
+            new(row: 0, column: 0, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromBottomLeft_ToTopRight()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 4, Col: 0),
+                routeTarget: (Row: 0, Col: 4));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 4, column: 0, charged: true),
+            new(row: 3, column: 1, charged: true),
+            new(row: 2, column: 2, charged: true),
+            new(row: 1, column: 3, charged: true),
+            new(row: 0, column: 4, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromBottomLeft_ToBottomRight()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualResult = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 4, Col: 0),
+                routeTarget: (Row: 4, Col: 4));
+
+        BooleanElementInfo[] expectedResult = 
+        {
+            new(row: 4, column: 0, charged: true),
+            new(row: 4, column: 1, charged: true),
+            new(row: 4, column: 2, charged: true),
+            new(row: 4, column: 3, charged: true),
+            new(row: 4, column: 4, charged: true)
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
 }

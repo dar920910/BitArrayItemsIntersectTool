@@ -257,89 +257,6 @@ public class CustomBooleanArray
         return intersections;
     }
 
-
-    public BooleanElementInfo[] FindShortestPathBetweenElements(
-        BooleanElementInfo startElement, BooleanElementInfo endElement)
-    {
-        startElement.IsPathNode = true;
-        endElement.IsPathNode = true;
-
-        LinkedList<BooleanElementInfo> shortestPath = new();
-        shortestPath.AddFirst(new LinkedListNode<BooleanElementInfo>(startElement));
-        shortestPath.AddLast(new LinkedListNode<BooleanElementInfo>(endElement));
-
-        BooleanElementInfo currentElement = startElement;
-        while (currentElement.Equals(endElement) is false)
-        {
-            List<BooleanElementInfo> neighbours = FindPossibleNeighbourPathElements(currentElement, startElement);
-            BooleanElementInfo nextElement = FindNextPathElement(neighbours, endElement);
-
-            if (nextElement.Equals(endElement))
-            {
-                break;
-            }
-
-            shortestPath.AddBefore(node: shortestPath.Last, value: nextElement);
-            currentElement = nextElement;
-        }
-
-        return shortestPath.ToArray();
-    }
-
-    private List<BooleanElementInfo> FindPossibleNeighbourPathElements(BooleanElementInfo elementInfo, BooleanElementInfo pathStartElement)
-    {
-        List<BooleanElementInfo> possiblePathElements = new();
-
-        List<BooleanElementInfo> neighbourElements = GetNeighboursElementsAt(
-            elementRow: elementInfo.Row, elementColumn: elementInfo.Column,
-            neighboursInfo: GetNeighboursInfoAt(elementInfo.Row, elementInfo.Column));
-
-        foreach (BooleanElementInfo element in neighbourElements)
-        {
-            if (element.Equals(pathStartElement))
-            {
-                continue;
-            }
-
-            if (element.IsCharged)
-            {
-                possiblePathElements.Add(element);
-            }
-        }
-
-        return possiblePathElements;
-    }
-
-    private BooleanElementInfo FindNextPathElement(List<BooleanElementInfo> possiblePathElements, BooleanElementInfo pathEndElement)
-    {
-        int shortestPathLengthByRow = int.MaxValue;
-        int shortestPathLengthByCol = int.MaxValue;
-
-        byte nextPathRowIndex = pathEndElement.Row;
-        byte nextPathColIndex = pathEndElement.Column;
-
-        foreach (BooleanElementInfo pathElement in possiblePathElements)
-        {
-            int pathLengthByRow = (pathEndElement.Row < pathElement.Row) ?
-                (pathElement.Row - pathEndElement.Row) : (pathEndElement.Row - pathElement.Row);
-
-            int pathLengthByCol = (pathEndElement.Column < pathElement.Column) ?
-                (pathElement.Column - pathEndElement.Column) : (pathEndElement.Column - pathElement.Column);
-
-            if ( (pathLengthByRow <= shortestPathLengthByRow) && (pathLengthByCol <= shortestPathLengthByCol) )
-            {
-                shortestPathLengthByRow = pathLengthByRow;
-                shortestPathLengthByCol = pathLengthByCol;
-
-                nextPathRowIndex = pathElement.Row;
-                nextPathColIndex = pathElement.Column;
-            }
-        }
-
-        return new BooleanElementInfo(nextPathRowIndex, nextPathColIndex, Content[nextPathRowIndex, nextPathColIndex]);
-    }
-
-
     public static CustomBooleanArray GenerateRandomBooleanArray(byte rows, byte columns)
     {
         var array = new bool[rows, columns];
@@ -370,16 +287,12 @@ public struct BooleanElementInfo
     public readonly byte Column;
     public readonly bool IsCharged;
 
-    public bool IsPathNode { get; set; }
-
     public BooleanElementInfo(byte row, byte column, 
         bool charged = false)
     {
         Row = row;
         Column = column;
         IsCharged = charged;
-
-        IsPathNode = false;
     }
 }
 

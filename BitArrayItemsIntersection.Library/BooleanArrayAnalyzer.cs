@@ -1,5 +1,5 @@
 #define SHORTEST_ROUTE_IMPL
-#undef SHORTEST_ROUTE_IMPL
+//#undef SHORTEST_ROUTE_IMPL
 
 namespace BitArrayItemsIntersection.Library;
 
@@ -110,12 +110,11 @@ public class BooleanArrayAnalyzer
         BooleanElementInfo currentElement = sourceElement;
         while (currentElement.Equals(targetElement) is false)
         {
-            RouteBuildRule nextElementSelection = ConfigureRouteBuildRule(routeSource, routeTarget);
-            BooleanElementInfo nextElement = SelectNextRouteElement(currentElement, nextElementSelection, routeNodes);
+            RouteBuildRule nextElementSelection = ConfigureRouteBuildRule(
+                from: (currentElement.Row, currentElement.Column), to: routeTarget);
 
-
-            //List<BooleanElementInfo> neighbours = FindPossibleNeighbourPathElements(currentElement, startElement);
-            //BooleanElementInfo nextElement = FindNextPathElement(neighbours, endElement);
+            BooleanElementInfo nextElement = SelectNextRouteElement(
+                currentElement, nextElementSelection, routeNodes);
 
             if (nextElement.Equals(targetElement))
             {
@@ -220,15 +219,26 @@ public class BooleanArrayAnalyzer
             if (direction == RouteBuildDirection.Top)
             {
                 nextElementRowIndex = (byte)(currentElement.Row - 1);
+                nextElementColIndex = currentElement.Column;
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
@@ -238,28 +248,49 @@ public class BooleanArrayAnalyzer
                 nextElementColIndex = (byte)(currentElement.Column + 1);
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
             if (direction == RouteBuildDirection.Right)
             {
+                nextElementRowIndex = currentElement.Row;
                 nextElementColIndex = (byte)(currentElement.Column + 1);
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
@@ -269,28 +300,49 @@ public class BooleanArrayAnalyzer
                 nextElementColIndex = (byte)(currentElement.Column + 1);
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
             if (direction == RouteBuildDirection.Bottom)
             {
                 nextElementRowIndex = (byte)(currentElement.Row + 1);
+                nextElementColIndex = currentElement.Column;
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
@@ -300,28 +352,49 @@ public class BooleanArrayAnalyzer
                 nextElementColIndex = (byte)(currentElement.Column - 1);
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
             if (direction == RouteBuildDirection.Left)
             {
+                nextElementRowIndex = currentElement.Row;
                 nextElementColIndex = (byte)(currentElement.Column - 1);
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
 
@@ -331,13 +404,23 @@ public class BooleanArrayAnalyzer
                 nextElementColIndex = (byte)(currentElement.Column - 1);
 
                 nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
-                if (currentElement.IsCharged == nextElementCharge)
+
+                var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
+
+                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
                 {
-                    break;
+                    continue;
                 }
                 else
                 {
-                    continue;
+                    if (currentElement.IsCharged == nextElementCharge)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
         }
