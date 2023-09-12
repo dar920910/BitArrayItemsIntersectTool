@@ -97,9 +97,9 @@ public class CustomBooleanArray
 
     public List<BooleanElementInfo> FindNeighbourElementsAt(byte elementRow, byte elementColumn)
          => GetNeighboursElementsAt(elementRow, elementColumn,
-                neighboursInfo: InitializeNeighboursInfoAt(elementRow, elementColumn));
+                neighboursInfo: GetNeighboursInfoAt(elementRow, elementColumn));
 
-    private NeighboursInfo InitializeNeighboursInfoAt(byte elementRow, byte elementColumn)
+    public NeighboursInfo GetNeighboursInfoAt(byte elementRow, byte elementColumn)
     {
         NeighboursInfo neighbours = new();
 
@@ -292,7 +292,7 @@ public class CustomBooleanArray
 
         List<BooleanElementInfo> neighbourElements = GetNeighboursElementsAt(
             elementRow: elementInfo.Row, elementColumn: elementInfo.Column,
-            neighboursInfo: InitializeNeighboursInfoAt(elementInfo.Row, elementInfo.Column));
+            neighboursInfo: GetNeighboursInfoAt(elementInfo.Row, elementInfo.Column));
 
         foreach (BooleanElementInfo element in neighbourElements)
         {

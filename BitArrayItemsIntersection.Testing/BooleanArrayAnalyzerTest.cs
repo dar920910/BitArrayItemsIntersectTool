@@ -1,3 +1,6 @@
+#define SHORTEST_ROUTE_IMPL
+#undef SHORTEST_ROUTE_IMPL
+
 using BitArrayItemsIntersection.Library;
 
 namespace BitArrayItemsIntersection.Testing;
@@ -661,4 +664,224 @@ public class BooleanArrayAnalyzerTest
 
         Assert.That(actualResult, Is.EqualTo(expectedResult));
     }
+
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenTop()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.Top)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.Top,
+                RouteBuildDirection.TopRight,
+                RouteBuildDirection.TopLeft,
+                RouteBuildDirection.Right,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.BottomLeft
+        }));
+    }
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenTopRight()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.TopRight)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.TopRight,
+                RouteBuildDirection.Right,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.TopLeft,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.BottomLeft,
+        }));
+    }
+
+    [Test]public void GetOrderedRouteDirections_WhenRight()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.Right)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.Right,
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.TopRight,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.BottomLeft,
+                RouteBuildDirection.TopLeft,
+        }));
+    }
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenBottomRight()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.BottomRight)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.Right,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.TopRight,
+                RouteBuildDirection.BottomLeft,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.TopLeft,
+        }));
+    }
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenBottom()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.Bottom)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.BottomLeft,
+                RouteBuildDirection.Right,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.TopRight,
+                RouteBuildDirection.TopLeft,
+        }));
+    }
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenBottomLeft()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.BottomLeft)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.BottomLeft,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.TopLeft,
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.TopLeft,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.TopRight,
+        }));
+    }
+    
+    [Test]
+    public void GetOrderedRouteDirections_WhenLeft()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.Left)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.Left,
+                RouteBuildDirection.BottomLeft,
+                RouteBuildDirection.TopLeft,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.Right,
+                RouteBuildDirection.BottomRight,
+                RouteBuildDirection.TopRight,
+        }));
+    }
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenTopLeft()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.TopLeft)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.TopLeft,
+                RouteBuildDirection.Left,
+                RouteBuildDirection.Top,
+                RouteBuildDirection.TopRight,
+                RouteBuildDirection.BottomLeft,
+                RouteBuildDirection.Right,
+                RouteBuildDirection.Bottom,
+                RouteBuildDirection.BottomRight,
+        }));
+    }
+
+    [Test]
+    public void GetOrderedRouteDirections_WhenNone()
+    {
+        Assert.That(
+            actual: new RouteBuildRule(RouteBuildDirection.None)
+                .GetOrderedRouteDirections(),
+            expression: Is.EqualTo(new RouteBuildDirection[] {
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+                RouteBuildDirection.None,
+        }));
+    }
+
+
+#if SHORTEST_ROUTE_IMPL
+    [Test]
+    public void FindShortestRouteBetween_FromTopLeft_ToBottomRight()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1 },
+                { 0, 0, 1 },
+                { 0, 0, 1 }
+            }
+        );
+
+        BooleanElementInfo[] actualPath = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 0, Col: 0),
+                routeTarget: (Row: 2, Col: 2));
+
+        BooleanElementInfo[] expectedPath = 
+        {
+            new(row: 0, column: 0, charged: true),
+            new(row: 0, column: 1, charged: true),
+            new(row: 1, column: 2, charged: true),
+            new(row: 2, column: 2, charged: true)
+        };
+
+        Assert.That(actualPath, Is.EqualTo(expectedPath));
+    }
+
+    [Test]
+    public void FindShortestRouteBetween_FromLeft_ToTopRight()
+    {
+        CustomBooleanArray array = new(
+            new int[,]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 0 },
+                { 1, 0, 0 }
+            }
+        );
+
+        BooleanElementInfo[] actualPath = new BooleanArrayAnalyzer(array)
+            .FindShortestRouteBetween(
+                routeSource: (Row: 2, Col: 0),
+                routeTarget: (Row: 0, Col: 2));
+
+        BooleanElementInfo[] expectedPath = 
+        {
+            new(row: 2, column: 0, charged: true),
+            new(row: 1, column: 1, charged: true),
+            new(row: 0, column: 2, charged: true)
+        };
+
+        Assert.That(actualPath, Is.EqualTo(expectedPath));
+    }
+#endif
 }
