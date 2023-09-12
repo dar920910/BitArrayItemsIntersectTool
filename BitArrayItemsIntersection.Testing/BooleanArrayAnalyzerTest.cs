@@ -396,4 +396,269 @@ public class BooleanArrayAnalyzerTest
                 expression: Is.EqualTo(RouteBuildDirection.TopLeft));
         });
     }
+
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromTopLeftToBottomRight()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (1, 1);
+        (byte Row, byte Col) routeTarget = (4, 8);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.BottomRight,
+            Priority_2 = RouteBuildDirection.Right,
+            Priority_3 = RouteBuildDirection.Bottom,
+            Priority_4 = RouteBuildDirection.TopRight,
+            Priority_5 = RouteBuildDirection.BottomLeft,
+            Priority_6 = RouteBuildDirection.Left,
+            Priority_7 = RouteBuildDirection.Top,
+            Priority_8 = RouteBuildDirection.TopLeft
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromBottomLeftToTopRight()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (3, 1);
+        (byte Row, byte Col) routeTarget = (1, 8);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.TopRight,
+            Priority_2 = RouteBuildDirection.Right,
+            Priority_3 = RouteBuildDirection.Top,
+            Priority_4 = RouteBuildDirection.BottomRight,
+            Priority_5 = RouteBuildDirection.TopLeft,
+            Priority_6 = RouteBuildDirection.Left,
+            Priority_7 = RouteBuildDirection.Bottom,
+            Priority_8 = RouteBuildDirection.BottomLeft
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromTopRightToBottomLeft()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (1, 8);
+        (byte Row, byte Col) routeTarget = (3, 1);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.BottomLeft,
+            Priority_2 = RouteBuildDirection.Left,
+            Priority_3 = RouteBuildDirection.Bottom,
+            Priority_4 = RouteBuildDirection.TopLeft,
+            Priority_5 = RouteBuildDirection.BottomRight,
+            Priority_6 = RouteBuildDirection.TopLeft,
+            Priority_7 = RouteBuildDirection.Top,
+            Priority_8 = RouteBuildDirection.TopRight
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromBottomRightToTopLeft()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (3, 8);
+        (byte Row, byte Col) routeTarget = (1, 1);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.TopLeft,
+            Priority_2 = RouteBuildDirection.Left,
+            Priority_3 = RouteBuildDirection.Top,
+            Priority_4 = RouteBuildDirection.TopRight,
+            Priority_5 = RouteBuildDirection.BottomLeft,
+            Priority_6 = RouteBuildDirection.Right,
+            Priority_7 = RouteBuildDirection.Bottom,
+            Priority_8 = RouteBuildDirection.BottomRight
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromTopToBottom()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (1, 5);
+        (byte Row, byte Col) routeTarget = (4, 5);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.Bottom,
+            Priority_2 = RouteBuildDirection.BottomRight,
+            Priority_3 = RouteBuildDirection.BottomLeft,
+            Priority_4 = RouteBuildDirection.Right,
+            Priority_5 = RouteBuildDirection.Left,
+            Priority_6 = RouteBuildDirection.Top,
+            Priority_7 = RouteBuildDirection.TopRight,
+            Priority_8 = RouteBuildDirection.TopLeft
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromBottomToTop()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (3, 5);
+        (byte Row, byte Col) routeTarget = (0, 5);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.Top,
+            Priority_2 = RouteBuildDirection.TopRight,
+            Priority_3 = RouteBuildDirection.TopLeft,
+            Priority_4 = RouteBuildDirection.Right,
+            Priority_5 = RouteBuildDirection.Left,
+            Priority_6 = RouteBuildDirection.Bottom,
+            Priority_7 = RouteBuildDirection.BottomRight,
+            Priority_8 = RouteBuildDirection.BottomLeft
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromLeftToRight()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (2, 1);
+        (byte Row, byte Col) routeTarget = (2, 8);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.Right,
+            Priority_2 = RouteBuildDirection.BottomRight,
+            Priority_3 = RouteBuildDirection.TopRight,
+            Priority_4 = RouteBuildDirection.Bottom,
+            Priority_5 = RouteBuildDirection.Top,
+            Priority_6 = RouteBuildDirection.Left,
+            Priority_7 = RouteBuildDirection.BottomLeft,
+            Priority_8 = RouteBuildDirection.TopLeft
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
+
+    [Test]
+    public void ConfigureRouteBuildRule_FromRightToLeft()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        (byte Row, byte Col) routeSource = (2, 8);
+        (byte Row, byte Col) routeTarget = (2, 1);
+
+        RouteBuildRule actualResult = new BooleanArrayAnalyzer(array)
+            .ConfigureRouteBuildRule(from: routeSource, to: routeTarget);
+
+        RouteBuildRule expectedResult = new()
+        {
+            Priority_1 = RouteBuildDirection.Left,
+            Priority_2 = RouteBuildDirection.BottomLeft,
+            Priority_3 = RouteBuildDirection.TopLeft,
+            Priority_4 = RouteBuildDirection.Bottom,
+            Priority_5 = RouteBuildDirection.Top,
+            Priority_6 = RouteBuildDirection.Right,
+            Priority_7 = RouteBuildDirection.BottomRight,
+            Priority_8 = RouteBuildDirection.TopRight
+        };
+
+        Assert.That(actualResult, Is.EqualTo(expectedResult));
+    }
 }
