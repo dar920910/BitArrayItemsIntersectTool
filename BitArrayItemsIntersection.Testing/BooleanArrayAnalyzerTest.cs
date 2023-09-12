@@ -263,4 +263,137 @@ public class BooleanArrayAnalyzerTest
             expression: Is.EqualTo(RouteBuildDirection.TopLeft)
         );
     }
+
+
+    [Test]
+    public void GetStraightDirectionFromSourceToTarget_WhenArrayHasMoreColsThanRows()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        });
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 2, Col: 4), to: (Row: 0, Col: 4)),
+                expression: Is.EqualTo(RouteBuildDirection.Top));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                    from: (Row: 2, Col: 4), to: (Row: 1, Col: 7)),
+                expression: Is.EqualTo(RouteBuildDirection.TopRight));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 2, Col: 4), to: (Row: 2, Col: 8)),
+                expression: Is.EqualTo(RouteBuildDirection.Right));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                .GetStraightDirectionFromSourceToTarget(
+                    from: (Row: 2, Col: 4), to: (Row: 3, Col: 6)),
+                expression: Is.EqualTo(RouteBuildDirection.BottomRight));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 2, Col: 4), to: (Row: 4, Col: 4)),
+                expression: Is.EqualTo(RouteBuildDirection.Bottom));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 2, Col: 4), to: (Row: 3, Col: 2)),
+                expression: Is.EqualTo(RouteBuildDirection.BottomLeft));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 2, Col: 4), to: (Row: 2, Col: 0)),
+                expression: Is.EqualTo(RouteBuildDirection.Left));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                    from: (Row: 2, Col: 4), to: (Row: 1, Col: 1)),
+                expression: Is.EqualTo(RouteBuildDirection.TopLeft));
+        });
+    }
+
+    [Test]
+    public void GetStraightDirectionFromSourceToTarget_WhenArrayHasMoreRowsThanCols()
+    {
+        CustomBooleanArray array = new(new int[,]
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 },
+            { 1, 1, 1, 1, 1 }
+        });
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 4, Col: 2), to: (Row: 0, Col: 2)),
+                expression: Is.EqualTo(RouteBuildDirection.Top));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                    from: (Row: 4, Col: 2), to: (Row: 1, Col: 3)),
+                expression: Is.EqualTo(RouteBuildDirection.TopRight));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 4, Col: 2), to: (Row: 4, Col: 4)),
+                expression: Is.EqualTo(RouteBuildDirection.Right));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                .GetStraightDirectionFromSourceToTarget(
+                    from: (Row: 4, Col: 2), to: (Row: 7, Col: 3)),
+                expression: Is.EqualTo(RouteBuildDirection.BottomRight));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 4, Col: 2), to: (Row: 8, Col: 2)),
+                expression: Is.EqualTo(RouteBuildDirection.Bottom));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 4, Col: 2), to: (Row: 7, Col: 1)),
+                expression: Is.EqualTo(RouteBuildDirection.BottomLeft));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                        from: (Row: 4, Col: 2), to: (Row: 4, Col: 0)),
+                expression: Is.EqualTo(RouteBuildDirection.Left));
+
+            Assert.That(
+                actual: new BooleanArrayAnalyzer(array)
+                    .GetStraightDirectionFromSourceToTarget(
+                    from: (Row: 4, Col: 2), to: (Row: 1, Col: 1)),
+                expression: Is.EqualTo(RouteBuildDirection.TopLeft));
+        });
+    }
 }
