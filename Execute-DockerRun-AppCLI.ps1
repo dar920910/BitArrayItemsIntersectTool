@@ -1,0 +1,1 @@
+docker run --interactive --tty --rm bitarray_items_intersection /usr/local/bin/BitArrayItemsIntersectTool/CLI/BitArrayItemsIntersection.App.CLI

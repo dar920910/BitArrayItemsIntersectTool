@@ -1,1 +1,0 @@
-docker run --publish 5001:5001 --interactive --tty --rm bitarrayitemsintersection /usr/local/bin/BitArrayItemsIntersectTool/Web/BitArrayItemsIntersection.App.Web
