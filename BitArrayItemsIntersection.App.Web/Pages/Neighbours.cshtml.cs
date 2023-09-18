@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 public class NeighboursModel : PageModel
 {
     public readonly CustomBooleanArray TargetArray;
-    public byte CurrentRow;
-    public byte CurrentColumn;
+    public byte CurrentRow { get; set; }
+    public byte CurrentCol { get; set; }
 
     public NeighboursModel()
     {
@@ -17,13 +17,8 @@ public class NeighboursModel : PageModel
     public void OnGet()
     {
         ViewData["Title"] = "Neighbours Page";
-    }
 
-    public IActionResult OnPost()
-    {
-        CurrentRow = DataStore.SelectedElementRow;
-        CurrentColumn = DataStore.SelectedElementColumn;
-
-        return Page();
+        CurrentRow = Convert.ToByte(RouteData.Values["SelectedElementRow"]);
+        CurrentCol = Convert.ToByte(RouteData.Values["SelectedElementColumn"]);
     }
 }

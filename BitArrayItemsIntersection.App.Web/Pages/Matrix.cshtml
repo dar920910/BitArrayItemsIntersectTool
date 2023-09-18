@@ -11,15 +11,17 @@
     <p>Available Coordinates: Rows - from 0 to @Model.LastElement.Row, Columns - from 0 to @Model.LastElement.Column</p>
     <form method="POST">
         <div>
-        <label for="selection_row" class="form-label">Select Element's Row:</label>
-        <input asp-for="@DataStore.SelectedElementRow" id="selection_row"
-            min="0" max="@Model.LastElement.Row" step="1" value="0"/>
+        <label class="form-label">Select Element's Row:</label>
+        <input asp-for="SelectedElementRow"
+            min="0" max="@Model.LastElement.Row" step="1"/>
         </div>
         <div>
-        <label for="selection_col" class="form-label">Select Element's Column:</label>
-        <input asp-for="@DataStore.SelectedElementColumn" id="selection_col"
-            min="0" max="@Model.LastElement.Column" step="1" value="0"/>
+        <label class="form-label">Select Element's Column:</label>
+        <input asp-for="SelectedElementColumn"
+            min="0" max="@Model.LastElement.Column" step="1"/>
         </div>
+        <input type="submit" class="btn btn-primary" value="Test Click"
+            onclick='console.log(`Row: ${@Model.SelectedElementRow}, Column: ${@Model.SelectedElementColumn}`);'/>
         <input type="submit" class="btn btn-primary" value="Find Intersections" formaction="/neighbours"/>
     </form>
 </div>

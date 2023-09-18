@@ -36,9 +36,6 @@ public class MatrixModel : PageModel
             columns: DataStore.ArrayDimension_X
         );
 
-        SelectedElementRow = 0;
-        SelectedElementColumn = 0;
-
         LastElement = 
         (
             Row: Convert.ToByte(TargetArray.CountOfRows - 1),
