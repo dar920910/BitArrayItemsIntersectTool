@@ -8,6 +8,20 @@
         X = @Model.TargetArray.CountOfColumns, Y = @Model.TargetArray.CountOfRows
     </h2>
     <a class="btn btn-primary" href="/">Return to Home Page</a>
+</div>
+<hr>
+<div>
+    <h3>
+        Current Element: 
+        [ 
+            Row: <label id="current_row">@Model.SelectedElement.Row</label>
+             ; 
+            Column: <label id="current_col">@Model.SelectedElement.Column</label>
+         ]
+    </h3>
+</div>
+<hr>
+<div>
     @if (Model.TargetArray.Content is not null)
     {
         <table class="table">
@@ -25,10 +39,13 @@
             {
                 <tr>
                     <th scope="row" style="color: white; background-color: black;">Row: @row</th>
-                @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (byte @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
                 {
                     bool @elementCharge = @Model.TargetArray.Content[@row, @column];
-                    <td class="@MatrixModel.GetElementClass(@elementCharge)">@elementCharge</td>
+                    <td class="@MatrixModel.GetElementClass(@elementCharge)"
+                        onclick="updateSelectedElement(`${@row}`, `${@column}`);">
+                        @elementCharge
+                    </td>
                 }
                 </tr>
             }
@@ -36,3 +53,15 @@
         </table>
     }
 </div>
+<script>
+    function updateSelectedElement(row, col) {
+
+        let elem1 = document.getElementById('current_row');
+        elem1.value = row;
+
+        let elem2 = document.getElementById('current_col');
+        elem2.value = col;
+
+        console.log(`[ Row: ${row} ; Column: ${col} ]`);
+    }
+</script>

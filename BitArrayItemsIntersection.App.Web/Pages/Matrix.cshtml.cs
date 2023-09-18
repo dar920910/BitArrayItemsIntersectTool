@@ -3,6 +3,8 @@ using BitArrayItemsIntersection.Library;
 
 public class MatrixModel : PageModel
 {
+    public (byte Row, byte Column) SelectedElement { get; set; }
+
     public CustomBooleanArray TargetArray { get; }
 
     public MatrixModel()
@@ -11,6 +13,8 @@ public class MatrixModel : PageModel
             rows: DataStore.ArrayDimension_Y,
             columns: DataStore.ArrayDimension_X
         );
+
+        SelectedElement = (Row: 0, Column: 0);
     }
 
     public void OnGet()

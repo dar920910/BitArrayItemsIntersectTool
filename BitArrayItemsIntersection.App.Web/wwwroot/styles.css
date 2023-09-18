@@ -10,3 +10,7 @@ td.noncharged {
     font-weight: normal;
     background-color: lightcoral;
 }
+
+td:focus-within {
+    background-color: gold;
+}
