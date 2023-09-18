@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BitArrayItemsIntersection.Library;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq.Expressions;
 
 public class MatrixModel : PageModel
 {
@@ -56,21 +55,7 @@ public class MatrixModel : PageModel
     public void OnGet()
     {
         ViewData["Title"] = "Target Matrix";
-    }
-
-    public IActionResult OnPost()
-    {
-        return Page();
-    }
-
-    public void DisplayElementIntersections()
-    {
-        ViewData["Title"] = "DisplayElementIntersections";
-    }
-
-    public void DisplayShortestRoute()
-    {
-        ViewData["Title"] = "DisplayShortestRoute";
+        DataStore.CurrentMatrixModel = this;
     }
 
     public static string GetElementClass(bool elementValue)

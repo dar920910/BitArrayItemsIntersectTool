@@ -1,0 +1,48 @@
+@page "/shortest_route"
+@model ShortestRouteModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="row">
+    <h1 class="display-2">ShortestRoute between A and B Elements</h1>
+</div>
+<div>
+    <h3>
+        Element A: [ Row: <label id="current_row">???</label> ; Column: <label id="current_col">???</label> ]
+        Element B: [ Row: <label id="current_row">???</label> ; Column: <label id="current_col">???</label> ]
+    </h3>
+</div>
+<hr>
+<div>
+    @if (Model.TargetArray.Content is not null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" style="color: white; background-color: black;">#</th>
+                @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                {
+                    <th scope="col" style="color: white; background-color: black;">Column: @column</th>
+                }
+                </tr>
+            </thead>
+            <tbody>
+            @for (byte @row = 0; @row < @Model.TargetArray.CountOfRows; @row++)
+            {
+                <tr>
+                    <th scope="row" style="color: white; background-color: black;">Row: @row</th>
+                @for (byte @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                {
+                    bool @elementCharge = @Model.TargetArray.Content[@row, @column];
+                    <td class="@MatrixModel.GetElementClass(@elementCharge)"
+                        onclick="updateSelectedElement(`${@row}`, `${@column}`);">
+                        @elementCharge
+                    </td>
+                }
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div>
+<hr>
+<a class="btn btn-primary" href="/">Return to Home Page</a>
