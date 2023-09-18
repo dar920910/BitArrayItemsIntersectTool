@@ -2,23 +2,54 @@
 @model MatrixModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <div class="row">
-    <h1 class="display-2">This is a New Matrix: </h1>
-    <h2>
-        This Matrix has the following dimensions:
-        X = @Model.TargetArray.CountOfColumns, Y = @Model.TargetArray.CountOfRows
-    </h2>
-    <a class="btn btn-primary" href="/">Return to Home Page</a>
+    <h1 class="display-2">Explore a New Matrix: </h1>
+    <h2>This Matrix has @Model.TargetArray.CountOfRows rows and @Model.TargetArray.CountOfColumns columns</h2>
 </div>
 <hr>
 <div>
-    <h3>
-        Current Element: 
-        [ 
-            Row: <label id="current_row">@Model.SelectedElement.Row</label>
-             ; 
-            Column: <label id="current_col">@Model.SelectedElement.Column</label>
-         ]
-    </h3>
+    <h4>Get Element's Intersections by Coordinates</h4>
+    <p>Available Coordinates: Rows - from 0 to @Model.LastElement.Row, Columns - from 0 to @Model.LastElement.Column</p>
+    <form method="POST">
+        <div>
+        <label for="selection_row" class="form-label">Select Element's Row:</label>
+        <input asp-for="@Model.SelectedElementRow" id="selection_row"
+            min="0" max="@Model.LastElement.Row" step="1" value="0"/>
+        </div>
+        <div>
+        <label for="selection_col" class="form-label">Select Element's Column:</label>
+        <input asp-for="@Model.SelectedElementColumn" id="selection_col"
+            min="0" max="@Model.LastElement.Column" step="1" value="0"/>
+        </div>
+        <input type="submit" class="btn btn-primary"/>
+    </form>
+</div>
+<hr>
+<div>
+    <h4>Find the Shortest Route between Two Elements</h4>
+    <p>Available Coordinates: Rows - from 0 to @Model.LastElement.Row, Columns - from 0 to @Model.LastElement.Column</p>
+    <form method="POST">
+        <div>
+            <div>
+                <label for="row_A" class="form-label">Input a Row Index for the Element A:</label>
+                <input asp-for="@Model.RouteRowCoordinate_A" id="row_A" min="0" max="@Model.LastElement.Row" step="1" value="0"/>
+            </div>
+            <div>
+                <label for="col_A" class="form-label">Input a Column Index for the Element A:</label>
+                <input asp-for="@Model.RouteColCoordinate_A" id="col_A" min="0" max="@Model.LastElement.Column" step="1" value="0"/>
+            </div>
+        </div>
+        <div>
+            <div>
+                <label for="row_B" class="form-label">Input a Row Index for the Element B:</label>
+                <input asp-for="@Model.RouteRowCoordinate_B" id="row_B" min="0" max="@Model.LastElement.Row" step="1" value="@Model.LastElement.Row"/>
+            </div>
+            <div>
+                <label for="col_B" class="form-label">Input a Column Index for the Element B:</label>
+                <input asp-for="@Model.RouteColCoordinate_B" id="col_B" min="0" max="@Model.LastElement.Column" step="1" value="@Model.LastElement.Column"/>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary"/>
+    </form>
 </div>
 <hr>
 <div>
@@ -53,6 +84,8 @@
         </table>
     }
 </div>
+<hr>
+<a class="btn btn-primary" href="/">Return to Home Page</a>
 <script>
     function updateSelectedElement(row, col) {
 

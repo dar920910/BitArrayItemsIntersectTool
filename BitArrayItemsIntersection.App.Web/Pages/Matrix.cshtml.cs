@@ -1,9 +1,32 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BitArrayItemsIntersection.Library;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 public class MatrixModel : PageModel
 {
-    public (byte Row, byte Column) SelectedElement { get; set; }
+    [BindProperty]
+    public byte SelectedElementRow { get; set; }
+
+    [BindProperty]
+    public byte SelectedElementColumn { get; set; }
+
+
+    [BindProperty]
+    public byte RouteRowCoordinate_A { get; set; }
+
+    [BindProperty]
+    public byte RouteColCoordinate_A { get; set; }
+
+    [BindProperty]
+    public byte RouteRowCoordinate_B { get; set; }
+
+    [BindProperty]
+    public byte RouteColCoordinate_B { get; set; }
+
+
+    public readonly (byte Row, byte Column) LastElement;
+
 
     public CustomBooleanArray TargetArray { get; }
 
@@ -14,12 +37,40 @@ public class MatrixModel : PageModel
             columns: DataStore.ArrayDimension_X
         );
 
-        SelectedElement = (Row: 0, Column: 0);
+        SelectedElementRow = 0;
+        SelectedElementColumn = 0;
+
+        LastElement = 
+        (
+            Row: Convert.ToByte(TargetArray.CountOfRows - 1),
+            Column: Convert.ToByte(TargetArray.CountOfColumns - 1)
+        );
+
+        RouteRowCoordinate_A = 0;
+        RouteColCoordinate_A = 0;
+
+        RouteRowCoordinate_B = LastElement.Row;
+        RouteColCoordinate_B = LastElement.Column;
     }
 
     public void OnGet()
     {
         ViewData["Title"] = "Target Matrix";
+    }
+
+    public IActionResult OnPost()
+    {
+        return Page();
+    }
+
+    public void DisplayElementIntersections()
+    {
+        ViewData["Title"] = "DisplayElementIntersections";
+    }
+
+    public void DisplayShortestRoute()
+    {
+        ViewData["Title"] = "DisplayShortestRoute";
     }
 
     public static string GetElementClass(bool elementValue)
