@@ -10,6 +10,9 @@ public static class DataStore
     public static byte CurrentElementRow { get; set; }
     public static byte CurrentElementCol { get; set; }
 
+    public static (byte Row, byte Col) RouteElement_A { get; set; }
+    public static (byte Row, byte Col) RouteElement_B { get; set; }
+
     static DataStore()
     {
         ArrayDimension_X = default;
@@ -17,5 +20,7 @@ public static class DataStore
         CurrentMatrixModel = default;
         CurrentElementRow = default;
         CurrentElementCol = default;
+        RouteElement_A = default;
+        RouteElement_B = default;
     }
 }

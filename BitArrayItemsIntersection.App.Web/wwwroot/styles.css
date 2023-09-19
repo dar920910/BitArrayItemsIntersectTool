@@ -36,3 +36,11 @@ td.another_element {
     font-weight: normal;
     background-color: lightgray;
 }
+
+td.route_bound {
+    background-color: orange;
+}
+
+td.route_node {
+    background-color: aquamarine;
+}

@@ -12,16 +12,16 @@ public class MatrixModel : PageModel
 
 
     [BindProperty]
-    public byte RouteRowCoordinate_A { get; set; }
+    public byte RouteElementRow_A { get; set; }
 
     [BindProperty]
-    public byte RouteColCoordinate_A { get; set; }
+    public byte RouteElementCol_A { get; set; }
 
     [BindProperty]
-    public byte RouteRowCoordinate_B { get; set; }
+    public byte RouteElementRow_B { get; set; }
 
     [BindProperty]
-    public byte RouteColCoordinate_B { get; set; }
+    public byte RouteElementCol_B { get; set; }
 
 
     public readonly (byte Row, byte Column) LastElement;
@@ -42,11 +42,11 @@ public class MatrixModel : PageModel
             Column: Convert.ToByte(TargetArray.CountOfColumns - 1)
         );
 
-        RouteRowCoordinate_A = 0;
-        RouteColCoordinate_A = 0;
+        RouteElementRow_A = 0;
+        RouteElementCol_A = 0;
 
-        RouteRowCoordinate_B = LastElement.Row;
-        RouteColCoordinate_B = LastElement.Column;
+        RouteElementRow_B = LastElement.Row;
+        RouteElementCol_B = LastElement.Column;
     }
 
     public void OnGet()
@@ -63,6 +63,22 @@ public class MatrixModel : PageModel
             DataStore.CurrentElementCol = SelectedElementCol;
 
             return RedirectToPage("/neighbours");
+        }
+        else
+        {
+            return Page();
+        }
+    }
+
+    public IActionResult OnPostFindShortestRouteBetweenElements()
+    {
+        if (ModelState.IsValid)
+        {
+            DataStore.CurrentMatrixModel = this;
+            DataStore.RouteElement_A = (RouteElementRow_A, RouteElementCol_A);
+            DataStore.RouteElement_B = (RouteElementRow_B, RouteElementCol_B);
+
+            return RedirectToPage("/shortestroute");
         }
         else
         {

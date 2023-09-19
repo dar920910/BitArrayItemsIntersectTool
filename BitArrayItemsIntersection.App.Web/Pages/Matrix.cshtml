@@ -27,28 +27,28 @@
 <div>
     <h4>Find the Shortest Route between Two Elements</h4>
     <p>Available Coordinates: Rows - from 0 to @Model.LastElement.Row, Columns - from 0 to @Model.LastElement.Column</p>
-    <form method="POST">
+    <form asp-page-handler="FindShortestRouteBetweenElements" method="POST">
         <div>
             <div>
-                <label for="row_A" class="form-label">Input a Row Index for the Element A:</label>
-                <input asp-for="@Model.RouteRowCoordinate_A" id="row_A" min="0" max="@Model.LastElement.Row" step="1" value="0"/>
+                <label class="form-label">Input a Row Index for the Element A:</label>
+                <input asp-for="RouteElementRow_A" min="0" max="@Model.LastElement.Row" step="1" value="0"/>
             </div>
             <div>
-                <label for="col_A" class="form-label">Input a Column Index for the Element A:</label>
-                <input asp-for="@Model.RouteColCoordinate_A" id="col_A" min="0" max="@Model.LastElement.Column" step="1" value="0"/>
+                <label class="form-label">Input a Col Index for the Element A:</label>
+                <input asp-for="RouteElementCol_A" min="0" max="@Model.LastElement.Column" step="1" value="0"/>
             </div>
         </div>
         <div>
             <div>
                 <label for="row_B" class="form-label">Input a Row Index for the Element B:</label>
-                <input asp-for="@Model.RouteRowCoordinate_B" id="row_B" min="0" max="@Model.LastElement.Row" step="1" value="@Model.LastElement.Row"/>
+                <input asp-for="RouteElementRow_B" min="0" max="@Model.LastElement.Row" step="1" value="@Model.LastElement.Row"/>
             </div>
             <div>
                 <label for="col_B" class="form-label">Input a Column Index for the Element B:</label>
-                <input asp-for="@Model.RouteColCoordinate_B" id="col_B" min="0" max="@Model.LastElement.Column" step="1" value="@Model.LastElement.Column"/>
+                <input asp-for="RouteElementCol_B" min="0" max="@Model.LastElement.Column" step="1" value="@Model.LastElement.Column"/>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Find the Shortest Route" formaction="/shortest_route"/>
+        <input type="submit" class="btn btn-primary" value="Find the Shortest Route"/>
     </form>
 </div>
 <hr>
