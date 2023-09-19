@@ -8,7 +8,7 @@ public class MatrixModel : PageModel
     public byte SelectedElementRow { get; set; }
 
     [BindProperty]
-    public byte SelectedElementColumn { get; set; }
+    public byte SelectedElementCol { get; set; }
 
 
     [BindProperty]
@@ -53,6 +53,21 @@ public class MatrixModel : PageModel
     {
         ViewData["Title"] = "Target Matrix";
         DataStore.CurrentMatrixModel = this;
+    }
+
+    public IActionResult OnPostFindElementNeighbours()
+    {
+        if (ModelState.IsValid)
+        {
+            DataStore.CurrentElementRow = SelectedElementRow;
+            DataStore.CurrentElementCol = SelectedElementCol;
+
+            return RedirectToPage("/neighbours");
+        }
+        else
+        {
+            return Page();
+        }
     }
 
     public static string GetElementClass(bool elementValue)

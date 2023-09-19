@@ -7,18 +7,15 @@ public static class DataStore
 
     public static MatrixModel CurrentMatrixModel { get; set; }
 
-    [BindProperty]
-    public static byte SelectedElementRow { get; set; }
-
-    [BindProperty]
-    public static byte SelectedElementColumn { get; set; }
+    public static byte CurrentElementRow { get; set; }
+    public static byte CurrentElementCol { get; set; }
 
     static DataStore()
     {
         ArrayDimension_X = default;
         ArrayDimension_Y = default;
         CurrentMatrixModel = default;
-        SelectedElementRow = default;
-        SelectedElementColumn = default;
+        CurrentElementRow = default;
+        CurrentElementCol = default;
     }
 }
