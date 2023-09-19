@@ -1,20 +1,25 @@
 
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BitArrayItemsIntersection.Library;
-using Microsoft.AspNetCore.Mvc;
 
 public class NeighboursModel : PageModel
 {
-    public readonly CustomBooleanArray TargetArray;
+    public readonly byte CurrentRow;
+    public readonly byte CurrentCol;
 
-    public byte CurrentRow { get; set; }
-    public byte CurrentCol { get; set; }
+    public readonly CustomBooleanArray TargetArray;
+    public readonly List<BooleanElementInfo> NeighbourElements;
 
     public NeighboursModel()
     {
-        TargetArray = DataStore.CurrentMatrixModel.TargetArray;
         CurrentRow = DataStore.CurrentElementRow;
         CurrentCol = DataStore.CurrentElementCol;
+
+        TargetArray = DataStore.CurrentMatrixModel.TargetArray;
+
+        NeighbourElements = TargetArray.FindNeighbourElementsAt(
+            elementRow: CurrentRow, elementColumn: CurrentCol
+        );
     }
 
     public void OnGet()

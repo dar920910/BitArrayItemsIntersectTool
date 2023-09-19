@@ -1,4 +1,5 @@
 @page "/neighbours"
+@using BitArrayItemsIntersection.Library
 @model NeighboursModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
@@ -12,6 +13,36 @@
             [ Row: <label id="current_row">@Model.CurrentRow</label> ; 
                 Column: <label id="current_col">@Model.CurrentCol</label> ]
     </h3>
+</div>
+<hr>
+<div>
+    @if (Model.NeighbourElements is not null)
+    {
+        <h4>Detected Neighbours of the Current Element</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Row</th>
+                    <th scope="col">Column</th>
+                    <th scope="col">Is Charged</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (byte @index = 0; @index < @Model.NeighbourElements.Count; @index++)
+                {
+                    BooleanElementInfo @element = @Model.NeighbourElements.ElementAt(@index);
+
+                    <tr>
+                        <th scope="row">@index</th>
+                        <td>@element.Row</td>
+                        <td>@element.Column</td>
+                        <td>@element.IsCharged</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 </div>
 <hr>
 <div>

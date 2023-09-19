@@ -52,13 +52,13 @@ public class MatrixModel : PageModel
     public void OnGet()
     {
         ViewData["Title"] = "Target Matrix";
-        DataStore.CurrentMatrixModel = this;
     }
 
     public IActionResult OnPostFindElementNeighbours()
     {
         if (ModelState.IsValid)
         {
+            DataStore.CurrentMatrixModel = this;
             DataStore.CurrentElementRow = SelectedElementRow;
             DataStore.CurrentElementCol = SelectedElementCol;
 
