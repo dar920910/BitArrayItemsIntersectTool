@@ -4,15 +4,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 public class IndexModel : PageModel
 {
     [BindProperty]
-    public byte CustomDimension_X { get; set; }
+    public byte CustomRowsDimension { get; set; }
 
     [BindProperty]
-    public byte CustomDimension_Y { get; set; }
+    public byte CustomColsDimension { get; set; }
 
     public IndexModel()
     {
-        CustomDimension_X = 25;
-        CustomDimension_Y = 75;
+        CustomRowsDimension = 10;
+        CustomColsDimension = 10;
     }
 
     public void OnGet()
@@ -24,8 +24,8 @@ public class IndexModel : PageModel
     {
         if (ModelState.IsValid)
         {
-            DataStore.ArrayDimension_X = CustomDimension_X;
-            DataStore.ArrayDimension_Y = CustomDimension_Y;
+            DataStore.ArrayRowsDimension = CustomRowsDimension;
+            DataStore.ArrayColsDimension = CustomColsDimension;
 
             return RedirectToPage("/matrix");
         }

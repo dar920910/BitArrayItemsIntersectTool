@@ -32,8 +32,8 @@ public class MatrixModel : PageModel
     public MatrixModel()
     {
         TargetArray = CustomBooleanArray.GenerateRandomBooleanArray(
-            rows: DataStore.ArrayDimension_Y,
-            columns: DataStore.ArrayDimension_X
+            rows: DataStore.ArrayRowsDimension,
+            columns: DataStore.ArrayColsDimension
         );
 
         LastElement = 
