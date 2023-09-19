@@ -19,13 +19,13 @@
     @if (Model.NeighbourElements is not null)
     {
         <h4>Detected Neighbours of the Current Element</h4>
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Row</th>
-                    <th scope="col">Column</th>
-                    <th scope="col">Is Charged</th>
+                    <th scope="col" style="color: white; background-color: black;">#</th>
+                    <th scope="col" style="color: white; background-color: black;">Row</th>
+                    <th scope="col" style="color: white; background-color: black;">Column</th>
+                    <th scope="col" style="color: white; background-color: black;">Is Charged</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,10 +34,10 @@
                     BooleanElementInfo @element = @Model.NeighbourElements.ElementAt(@index);
 
                     <tr>
-                        <th scope="row">@index</th>
-                        <td>@element.Row</td>
-                        <td>@element.Column</td>
-                        <td>@element.IsCharged</td>
+                        <th scope="row" style="color: white; background-color: black;">Neighbour: @index</th>
+                        <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.Row</td>
+                        <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.Column</td>
+                        <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.IsCharged</td>
                     </tr>
                 }
             </tbody>
@@ -65,10 +65,8 @@
                     <th scope="row" style="color: white; background-color: black;">Row: @row</th>
                 @for (byte @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
                 {
-                    bool @elementCharge = @Model.TargetArray.Content[@row, @column];
-                    <td class="@MatrixModel.GetElementClass(@elementCharge)"
-                        onclick="updateSelectedElement(`${@row}`, `${@column}`);">
-                        @elementCharge
+                    <td class="@Model.GetElementClass(@row, @column)">
+                        @Model.TargetArray.Content[@row, @column]
                     </td>
                 }
                 </tr>

@@ -1,16 +1,38 @@
+td {
+    color: black;
+    text-align: center;
+}
+
+th {
+    text-align: center;
+}
 
 td.charged {
-    color: black;
     font-weight: bolder;
     background-color: lightgreen;
 }
 
 td.noncharged {
-    color: black;
     font-weight: normal;
     background-color: lightcoral;
 }
 
-td:focus-within {
+td.current_element {
+    font-weight: bolder;
     background-color: gold;
+}
+
+td.neighbour_charged {
+    font-weight: bolder;
+    background-color: lightgreen;
+}
+
+td.neighbour_noncharged {
+    font-weight: bolder;
+    background-color: lightcoral;
+}
+
+td.another_element {
+    font-weight: normal;
+    background-color: lightgray;
 }

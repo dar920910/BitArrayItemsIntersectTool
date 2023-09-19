@@ -26,4 +26,24 @@ public class NeighboursModel : PageModel
     {
         ViewData["Title"] = "Neighbours Page";
     }
+
+    public string GetElementClass(byte elementRow, byte elementCol)
+    {
+        BooleanElementInfo element = new(elementRow, elementCol,
+            TargetArray.Content[elementRow, elementCol]);
+
+        if ( (element.Row == CurrentRow) && (element.Column == CurrentCol) )
+        {
+            return "current_element";
+        }
+        else if (NeighbourElements.Contains(element))
+        {
+            return element.IsCharged ?
+                "neighbour_charged" : "neighbour_noncharged";
+        }
+        else
+        {
+            return "another_element";
+        }
+    }
 }
