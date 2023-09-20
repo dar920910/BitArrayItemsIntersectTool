@@ -1,0 +1,44 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "App.CLI",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/BitArrayItemsIntersection.App.CLI/bin/Debug/net6.0/BitArrayItemsIntersection.App.CLI.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "stopAtEntry": false,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "App.Web",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/BitArrayItemsIntersection.App.Web/bin/Debug/net6.0/BitArrayItemsIntersection.App.Web.dll",
+      "args": [],
+      "cwd": "${workspaceFolder}/BitArrayItemsIntersection.App.Web",
+      "launchBrowser": {
+        "enabled": true,
+        "args": "${auto-detect-url}",
+        "windows": {
+            "command": "cmd.exe",
+            "args": "/C start \"\" \"C:\\Program Files\\Google\\Chrome Dev\\Application\\chrome.exe\" ${auto-detect-url}"
+        }
+      },
+      "stopAtEntry": false,
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "\\bNow listening on:\\s+(http?://\\S+)"
+      },
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sourceFileMap": {
+        "/Views": "${workspaceFolder}/Views"
+      }
+    }
+  ]
+}
