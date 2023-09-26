@@ -1,15 +1,44 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+//-----------------------------------------------------------------------
+// <copyright file="Matrix.cshtml.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1649 // FileNameMustMatchTypeName
+
 using BitArrayItemsIntersection.Library;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class MatrixModel : PageModel
 {
+    public MatrixModel()
+    {
+        this.TargetArray = CustomBooleanArray.GenerateRandomBooleanArray(
+            rows: DataStore.ArrayRowsDimension,
+            columns: DataStore.ArrayColsDimension);
+
+        this.LastElement = (
+            Row: Convert.ToByte(this.TargetArray.CountOfRows - 1),
+            Column: Convert.ToByte(this.TargetArray.CountOfColumns - 1));
+
+        this.RouteElementRow_A = 0;
+        this.RouteElementCol_A = 0;
+
+        this.RouteElementRow_B = this.LastElement.Row;
+        this.RouteElementCol_B = this.LastElement.Column;
+    }
+
+    public CustomBooleanArray TargetArray { get; }
+
+    public (byte Row, byte Column) LastElement { get; }
+
     [BindProperty]
     public byte SelectedElementRow { get; set; }
 
     [BindProperty]
     public byte SelectedElementCol { get; set; }
-
 
     [BindProperty]
     public byte RouteElementRow_A { get; set; }
@@ -23,71 +52,43 @@ public class MatrixModel : PageModel
     [BindProperty]
     public byte RouteElementCol_B { get; set; }
 
-
-    public readonly (byte Row, byte Column) LastElement;
-
-
-    public CustomBooleanArray TargetArray { get; }
-
-    public MatrixModel()
-    {
-        TargetArray = CustomBooleanArray.GenerateRandomBooleanArray(
-            rows: DataStore.ArrayRowsDimension,
-            columns: DataStore.ArrayColsDimension
-        );
-
-        LastElement = 
-        (
-            Row: Convert.ToByte(TargetArray.CountOfRows - 1),
-            Column: Convert.ToByte(TargetArray.CountOfColumns - 1)
-        );
-
-        RouteElementRow_A = 0;
-        RouteElementCol_A = 0;
-
-        RouteElementRow_B = LastElement.Row;
-        RouteElementCol_B = LastElement.Column;
-    }
+    public static string GetElementClass(bool elementValue) =>
+        elementValue ? "charged" : "noncharged";
 
     public void OnGet()
     {
-        ViewData["Title"] = "Target Matrix";
+        this.ViewData["Title"] = "Target Matrix";
     }
 
     public IActionResult OnPostFindElementNeighbours()
     {
-        if (ModelState.IsValid)
+        if (this.ModelState.IsValid)
         {
             DataStore.CurrentMatrixModel = this;
-            DataStore.CurrentElementRow = SelectedElementRow;
-            DataStore.CurrentElementCol = SelectedElementCol;
+            DataStore.CurrentElementRow = this.SelectedElementRow;
+            DataStore.CurrentElementCol = this.SelectedElementCol;
 
-            return RedirectToPage("/neighbours");
+            return this.RedirectToPage("/neighbours");
         }
         else
         {
-            return Page();
+            return this.Page();
         }
     }
 
     public IActionResult OnPostFindShortestRouteBetweenElements()
     {
-        if (ModelState.IsValid)
+        if (this.ModelState.IsValid)
         {
             DataStore.CurrentMatrixModel = this;
-            DataStore.RouteElement_A = (RouteElementRow_A, RouteElementCol_A);
-            DataStore.RouteElement_B = (RouteElementRow_B, RouteElementCol_B);
+            DataStore.RouteElement_A = (this.RouteElementRow_A, this.RouteElementCol_A);
+            DataStore.RouteElement_B = (this.RouteElementRow_B, this.RouteElementCol_B);
 
-            return RedirectToPage("/shortestroute");
+            return this.RedirectToPage("/shortestroute");
         }
         else
         {
-            return Page();
+            return this.Page();
         }
-    }
-
-    public static string GetElementClass(bool elementValue)
-    {
-        return elementValue ? "charged" : "noncharged";
     }
 }

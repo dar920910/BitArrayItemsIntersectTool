@@ -1,25 +1,32 @@
-#define SHORTEST_ROUTE_IMPL
-//#undef SHORTEST_ROUTE_IMPL
+//-----------------------------------------------------------------------
+// <copyright file="BooleanArrayAnalyzer.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1602 // EnumerationItemsMustBeDocumented
 
 namespace BitArrayItemsIntersection.Library;
 
 public class BooleanArrayAnalyzer
 {
-    private readonly CustomBooleanArray _Array;
+    private readonly CustomBooleanArray customArray;
+
     public BooleanArrayAnalyzer(CustomBooleanArray array)
     {
-        _Array = array;
+        this.customArray = array;
     }
 
     public bool CanTryToMakeRouteBetweenArrayElements(
         (byte Row, byte Col) from, (byte Row, byte Col) to)
     {
-        if ( (from.Row < _Array.CountOfRows) && (from.Col < _Array.CountOfColumns) )
+        if ((from.Row < this.customArray.CountOfRows) && (from.Col < this.customArray.CountOfColumns))
         {
-            if ( (to.Row < _Array.CountOfRows) && (to.Col < _Array.CountOfColumns) )
+            if ((to.Row < this.customArray.CountOfRows) && (to.Col < this.customArray.CountOfColumns))
             {
-                bool routeSource = _Array.Content[from.Row, from.Col];
-                bool routeTarget = _Array.Content[to.Row, to.Col];
+                bool routeSource = this.customArray.Content[from.Row, from.Col];
+                bool routeTarget = this.customArray.Content[to.Row, to.Col];
 
                 return routeSource == routeTarget;
             }
@@ -80,40 +87,34 @@ public class BooleanArrayAnalyzer
 
     public RouteBuildRule ConfigureRouteBuildRule((byte Row, byte Col) from, (byte Row, byte Col) to)
     {
-        RouteBuildDirection direction = GetStraightDirectionFromSourceToTarget(from ,to);
+        RouteBuildDirection direction = this.GetStraightDirectionFromSourceToTarget(from, to);
         return new RouteBuildRule(direction);
     }
 
-
-#if SHORTEST_ROUTE_IMPL
     public BooleanElementInfo[] FindShortestRouteBetween(
         (byte Row, byte Col) routeSource, (byte Row, byte Col) routeTarget)
     {
-        BooleanElementInfo sourceElement = new
-        (
+        BooleanElementInfo sourceElement = new (
             row: routeSource.Row,
             column: routeSource.Col,
-            charged: _Array.Content[routeSource.Row, routeSource.Col]
-        );
+            charged: this.customArray.Content[routeSource.Row, routeSource.Col]);
 
-        BooleanElementInfo targetElement = new
-        (
+        BooleanElementInfo targetElement = new (
             row: routeTarget.Row,
             column: routeTarget.Col,
-            charged: _Array.Content[routeTarget.Row, routeTarget.Col]
-        );
+            charged: this.customArray.Content[routeTarget.Row, routeTarget.Col]);
 
-        LinkedList<BooleanElementInfo> routeNodes = new();
+        LinkedList<BooleanElementInfo> routeNodes = new ();
         routeNodes.AddFirst(new LinkedListNode<BooleanElementInfo>(sourceElement));
         routeNodes.AddLast(new LinkedListNode<BooleanElementInfo>(targetElement));
 
         BooleanElementInfo currentElement = sourceElement;
         while (currentElement.Equals(targetElement) is false)
         {
-            RouteBuildRule nextElementSelection = ConfigureRouteBuildRule(
+            RouteBuildRule nextElementSelection = this.ConfigureRouteBuildRule(
                 from: (currentElement.Row, currentElement.Column), to: routeTarget);
 
-            BooleanElementInfo nextElement = SelectNextRouteElement(
+            BooleanElementInfo nextElement = this.SelectNextRouteElement(
                 currentElement, nextElementSelection, routeNodes);
 
             if (nextElement.Equals(targetElement))
@@ -128,12 +129,12 @@ public class BooleanArrayAnalyzer
         return routeNodes.ToArray();
     }
 
-    private BooleanElementInfo SelectNextRouteElement(BooleanElementInfo currentElement,
-        RouteBuildRule nextElementSelection, LinkedList<BooleanElementInfo> routeNodes)
+    private BooleanElementInfo SelectNextRouteElement(
+        BooleanElementInfo currentElement, RouteBuildRule nextElementSelection, LinkedList<BooleanElementInfo> routeNodes)
     {
         RouteBuildDirection[] suggestedDirections = nextElementSelection.GetOrderedRouteDirections();
-        NeighboursInfo neighboursInfo = _Array.GetNeighboursInfoAt(currentElement.Row, currentElement.Column);
-        List<RouteBuildDirection> possibleDirections = new();
+        NeighboursInfo neighboursInfo = this.customArray.GetNeighboursInfoAt(currentElement.Row, currentElement.Column);
+        List<RouteBuildDirection> possibleDirections = new ();
 
         foreach (RouteBuildDirection direction in suggestedDirections)
         {
@@ -221,11 +222,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = (byte)(currentElement.Row - 1);
                 nextElementColIndex = currentElement.Column;
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -247,11 +248,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = (byte)(currentElement.Row - 1);
                 nextElementColIndex = (byte)(currentElement.Column + 1);
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -273,11 +274,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = currentElement.Row;
                 nextElementColIndex = (byte)(currentElement.Column + 1);
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -299,11 +300,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = (byte)(currentElement.Row + 1);
                 nextElementColIndex = (byte)(currentElement.Column + 1);
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -325,11 +326,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = (byte)(currentElement.Row + 1);
                 nextElementColIndex = currentElement.Column;
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -351,11 +352,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = (byte)(currentElement.Row + 1);
                 nextElementColIndex = (byte)(currentElement.Column - 1);
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -377,11 +378,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = currentElement.Row;
                 nextElementColIndex = (byte)(currentElement.Column - 1);
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -403,11 +404,11 @@ public class BooleanArrayAnalyzer
                 nextElementRowIndex = (byte)(currentElement.Row - 1);
                 nextElementColIndex = (byte)(currentElement.Column - 1);
 
-                nextElementCharge = _Array.Content[nextElementRowIndex, nextElementColIndex];
+                nextElementCharge = this.customArray.Content[nextElementRowIndex, nextElementColIndex];
 
                 var element = new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
 
-                if ( routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false) )
+                if (routeNodes.Contains(element) && (element.Equals(routeNodes.Last.Value) is false))
                 {
                     continue;
                 }
@@ -427,12 +428,119 @@ public class BooleanArrayAnalyzer
 
         return new BooleanElementInfo(nextElementRowIndex, nextElementColIndex, nextElementCharge);
     }
-#endif
 }
-
 
 public record RouteBuildRule
 {
+    public RouteBuildRule()
+    {
+        this.Priority_1 = RouteBuildDirection.None;
+        this.Priority_2 = RouteBuildDirection.None;
+        this.Priority_3 = RouteBuildDirection.None;
+        this.Priority_4 = RouteBuildDirection.None;
+        this.Priority_5 = RouteBuildDirection.None;
+        this.Priority_6 = RouteBuildDirection.None;
+        this.Priority_7 = RouteBuildDirection.None;
+        this.Priority_8 = RouteBuildDirection.None;
+    }
+
+    public RouteBuildRule(RouteBuildDirection straightFromSourceToTarget)
+    {
+        switch (straightFromSourceToTarget)
+        {
+            case RouteBuildDirection.Top:
+                this.Priority_1 = RouteBuildDirection.Top;
+                this.Priority_2 = RouteBuildDirection.TopRight;
+                this.Priority_3 = RouteBuildDirection.TopLeft;
+                this.Priority_4 = RouteBuildDirection.Right;
+                this.Priority_5 = RouteBuildDirection.Left;
+                this.Priority_6 = RouteBuildDirection.Bottom;
+                this.Priority_7 = RouteBuildDirection.BottomRight;
+                this.Priority_8 = RouteBuildDirection.BottomLeft;
+                break;
+            case RouteBuildDirection.TopRight:
+                this.Priority_1 = RouteBuildDirection.TopRight;
+                this.Priority_2 = RouteBuildDirection.Right;
+                this.Priority_3 = RouteBuildDirection.Top;
+                this.Priority_4 = RouteBuildDirection.BottomRight;
+                this.Priority_5 = RouteBuildDirection.TopLeft;
+                this.Priority_6 = RouteBuildDirection.Left;
+                this.Priority_7 = RouteBuildDirection.Bottom;
+                this.Priority_8 = RouteBuildDirection.BottomLeft;
+                break;
+            case RouteBuildDirection.Right:
+                this.Priority_1 = RouteBuildDirection.Right;
+                this.Priority_2 = RouteBuildDirection.BottomRight;
+                this.Priority_3 = RouteBuildDirection.TopRight;
+                this.Priority_4 = RouteBuildDirection.Bottom;
+                this.Priority_5 = RouteBuildDirection.Top;
+                this.Priority_6 = RouteBuildDirection.Left;
+                this.Priority_7 = RouteBuildDirection.BottomLeft;
+                this.Priority_8 = RouteBuildDirection.TopLeft;
+                break;
+            case RouteBuildDirection.BottomRight:
+                this.Priority_1 = RouteBuildDirection.BottomRight;
+                this.Priority_2 = RouteBuildDirection.Right;
+                this.Priority_3 = RouteBuildDirection.Bottom;
+                this.Priority_4 = RouteBuildDirection.TopRight;
+                this.Priority_5 = RouteBuildDirection.BottomLeft;
+                this.Priority_6 = RouteBuildDirection.Left;
+                this.Priority_7 = RouteBuildDirection.Top;
+                this.Priority_8 = RouteBuildDirection.TopLeft;
+                break;
+            case RouteBuildDirection.Bottom:
+                this.Priority_1 = RouteBuildDirection.Bottom;
+                this.Priority_2 = RouteBuildDirection.BottomRight;
+                this.Priority_3 = RouteBuildDirection.BottomLeft;
+                this.Priority_4 = RouteBuildDirection.Right;
+                this.Priority_5 = RouteBuildDirection.Left;
+                this.Priority_6 = RouteBuildDirection.Top;
+                this.Priority_7 = RouteBuildDirection.TopRight;
+                this.Priority_8 = RouteBuildDirection.TopLeft;
+                break;
+            case RouteBuildDirection.BottomLeft:
+                this.Priority_1 = RouteBuildDirection.BottomLeft;
+                this.Priority_2 = RouteBuildDirection.Left;
+                this.Priority_3 = RouteBuildDirection.Bottom;
+                this.Priority_4 = RouteBuildDirection.TopLeft;
+                this.Priority_5 = RouteBuildDirection.BottomRight;
+                this.Priority_6 = RouteBuildDirection.TopLeft;
+                this.Priority_7 = RouteBuildDirection.Top;
+                this.Priority_8 = RouteBuildDirection.TopRight;
+                break;
+            case RouteBuildDirection.Left:
+                this.Priority_1 = RouteBuildDirection.Left;
+                this.Priority_2 = RouteBuildDirection.BottomLeft;
+                this.Priority_3 = RouteBuildDirection.TopLeft;
+                this.Priority_4 = RouteBuildDirection.Bottom;
+                this.Priority_5 = RouteBuildDirection.Top;
+                this.Priority_6 = RouteBuildDirection.Right;
+                this.Priority_7 = RouteBuildDirection.BottomRight;
+                this.Priority_8 = RouteBuildDirection.TopRight;
+                break;
+            case RouteBuildDirection.TopLeft:
+                this.Priority_1 = RouteBuildDirection.TopLeft;
+                this.Priority_2 = RouteBuildDirection.Left;
+                this.Priority_3 = RouteBuildDirection.Top;
+                this.Priority_4 = RouteBuildDirection.TopRight;
+                this.Priority_5 = RouteBuildDirection.BottomLeft;
+                this.Priority_6 = RouteBuildDirection.Right;
+                this.Priority_7 = RouteBuildDirection.Bottom;
+                this.Priority_8 = RouteBuildDirection.BottomRight;
+                break;
+            default:
+                this.Priority_1 = RouteBuildDirection.None;
+                this.Priority_2 = RouteBuildDirection.None;
+                this.Priority_3 = RouteBuildDirection.None;
+                this.Priority_4 = RouteBuildDirection.None;
+                this.Priority_5 = RouteBuildDirection.None;
+                this.Priority_6 = RouteBuildDirection.None;
+                this.Priority_7 = RouteBuildDirection.None;
+                this.Priority_8 = RouteBuildDirection.None;
+                break;
+        }
+    }
+
     public RouteBuildDirection Priority_1 { get; set; }
     public RouteBuildDirection Priority_2 { get; set; }
     public RouteBuildDirection Priority_3 { get; set; }
@@ -442,127 +550,18 @@ public record RouteBuildRule
     public RouteBuildDirection Priority_7 { get; set; }
     public RouteBuildDirection Priority_8 { get; set; }
 
-    public RouteBuildRule()
-    {
-        Priority_1 = RouteBuildDirection.None;
-        Priority_2 = RouteBuildDirection.None;
-        Priority_3 = RouteBuildDirection.None;
-        Priority_4 = RouteBuildDirection.None;
-        Priority_5 = RouteBuildDirection.None;
-        Priority_6 = RouteBuildDirection.None;
-        Priority_7 = RouteBuildDirection.None;
-        Priority_8 = RouteBuildDirection.None;
-    }
-    public RouteBuildRule(RouteBuildDirection straightFromSourceToTarget)
-    {
-        switch (straightFromSourceToTarget)
-        {
-            case RouteBuildDirection.Top:
-                Priority_1 = RouteBuildDirection.Top;
-                Priority_2 = RouteBuildDirection.TopRight;
-                Priority_3 = RouteBuildDirection.TopLeft;
-                Priority_4 = RouteBuildDirection.Right;
-                Priority_5 = RouteBuildDirection.Left;
-                Priority_6 = RouteBuildDirection.Bottom;
-                Priority_7 = RouteBuildDirection.BottomRight;
-                Priority_8 = RouteBuildDirection.BottomLeft;
-                break;
-            case RouteBuildDirection.TopRight:
-                Priority_1 = RouteBuildDirection.TopRight;
-                Priority_2 = RouteBuildDirection.Right;
-                Priority_3 = RouteBuildDirection.Top;
-                Priority_4 = RouteBuildDirection.BottomRight;
-                Priority_5 = RouteBuildDirection.TopLeft;
-                Priority_6 = RouteBuildDirection.Left;
-                Priority_7 = RouteBuildDirection.Bottom;
-                Priority_8 = RouteBuildDirection.BottomLeft;
-                break;
-            case RouteBuildDirection.Right:
-                Priority_1 = RouteBuildDirection.Right;
-                Priority_2 = RouteBuildDirection.BottomRight;
-                Priority_3 = RouteBuildDirection.TopRight;
-                Priority_4 = RouteBuildDirection.Bottom;
-                Priority_5 = RouteBuildDirection.Top;
-                Priority_6 = RouteBuildDirection.Left;
-                Priority_7 = RouteBuildDirection.BottomLeft;
-                Priority_8 = RouteBuildDirection.TopLeft;
-                break;
-            case RouteBuildDirection.BottomRight:
-                Priority_1 = RouteBuildDirection.BottomRight;
-                Priority_2 = RouteBuildDirection.Right;
-                Priority_3 = RouteBuildDirection.Bottom;
-                Priority_4 = RouteBuildDirection.TopRight;
-                Priority_5 = RouteBuildDirection.BottomLeft;
-                Priority_6 = RouteBuildDirection.Left;
-                Priority_7 = RouteBuildDirection.Top;
-                Priority_8 = RouteBuildDirection.TopLeft;
-                break;
-            case RouteBuildDirection.Bottom:
-                Priority_1 = RouteBuildDirection.Bottom;
-                Priority_2 = RouteBuildDirection.BottomRight;
-                Priority_3 = RouteBuildDirection.BottomLeft;
-                Priority_4 = RouteBuildDirection.Right;
-                Priority_5 = RouteBuildDirection.Left;
-                Priority_6 = RouteBuildDirection.Top;
-                Priority_7 = RouteBuildDirection.TopRight;
-                Priority_8 = RouteBuildDirection.TopLeft;
-                break;
-            case RouteBuildDirection.BottomLeft:
-                Priority_1 = RouteBuildDirection.BottomLeft;
-                Priority_2 = RouteBuildDirection.Left;
-                Priority_3 = RouteBuildDirection.Bottom;
-                Priority_4 = RouteBuildDirection.TopLeft;
-                Priority_5 = RouteBuildDirection.BottomRight;
-                Priority_6 = RouteBuildDirection.TopLeft;
-                Priority_7 = RouteBuildDirection.Top;
-                Priority_8 = RouteBuildDirection.TopRight;
-                break;
-            case RouteBuildDirection.Left:
-                Priority_1 = RouteBuildDirection.Left;
-                Priority_2 = RouteBuildDirection.BottomLeft;
-                Priority_3 = RouteBuildDirection.TopLeft;
-                Priority_4 = RouteBuildDirection.Bottom;
-                Priority_5 = RouteBuildDirection.Top;
-                Priority_6 = RouteBuildDirection.Right;
-                Priority_7 = RouteBuildDirection.BottomRight;
-                Priority_8 = RouteBuildDirection.TopRight;
-                break;
-            case RouteBuildDirection.TopLeft:
-                Priority_1 = RouteBuildDirection.TopLeft;
-                Priority_2 = RouteBuildDirection.Left;
-                Priority_3 = RouteBuildDirection.Top;
-                Priority_4 = RouteBuildDirection.TopRight;
-                Priority_5 = RouteBuildDirection.BottomLeft;
-                Priority_6 = RouteBuildDirection.Right;
-                Priority_7 = RouteBuildDirection.Bottom;
-                Priority_8 = RouteBuildDirection.BottomRight;
-                break;
-            default:
-                Priority_1 = RouteBuildDirection.None;
-                Priority_2 = RouteBuildDirection.None;
-                Priority_3 = RouteBuildDirection.None;
-                Priority_4 = RouteBuildDirection.None;
-                Priority_5 = RouteBuildDirection.None;
-                Priority_6 = RouteBuildDirection.None;
-                Priority_7 = RouteBuildDirection.None;
-                Priority_8 = RouteBuildDirection.None;
-                break;
-        }
-    }
-
     public RouteBuildDirection[] GetOrderedRouteDirections() => new RouteBuildDirection[]
     {
-        Priority_1,
-        Priority_2,
-        Priority_3,
-        Priority_4,
-        Priority_5,
-        Priority_6,
-        Priority_7,
-        Priority_8
+        this.Priority_1,
+        this.Priority_2,
+        this.Priority_3,
+        this.Priority_4,
+        this.Priority_5,
+        this.Priority_6,
+        this.Priority_7,
+        this.Priority_8,
     };
 }
-
 
 public enum RouteBuildDirection
 {
@@ -574,5 +573,5 @@ public enum RouteBuildDirection
     Bottom,
     BottomLeft,
     Left,
-    TopLeft
+    TopLeft,
 }

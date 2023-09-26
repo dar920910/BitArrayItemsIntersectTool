@@ -1,64 +1,73 @@
-using Microsoft.AspNetCore.Mvc.RazorPages;
+//-----------------------------------------------------------------------
+// <copyright file="ShortestRoute.cshtml.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1649 // FileNameMustMatchTypeName
+
 using BitArrayItemsIntersection.Library;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class ShortestRouteModel : PageModel
 {
-    public readonly CustomBooleanArray TargetArray;
-
-    public readonly (byte Row, byte Col) RouteElement_A;
-    public readonly (byte Row, byte Col) RouteElement_B;
-
-    public readonly BooleanElementInfo[] RouteElements;
-
-    public readonly string RouteBuildResultMessage;
-
     public ShortestRouteModel()
     {
-        TargetArray = DataStore.CurrentMatrixModel.TargetArray;
+        this.TargetArray = DataStore.CurrentMatrixModel.TargetArray;
 
-        RouteElement_A = DataStore.RouteElement_A;
-        RouteElement_B = DataStore.RouteElement_B;
+        this.RouteElement_A = DataStore.RouteElement_A;
+        this.RouteElement_B = DataStore.RouteElement_B;
 
-        BooleanArrayAnalyzer analyzer = new(TargetArray);
+        BooleanArrayAnalyzer analyzer = new (this.TargetArray);
 
         if (analyzer.CanTryToMakeRouteBetweenArrayElements(
-            from: RouteElement_A, to: RouteElement_B))
+            from: this.RouteElement_A, to: this.RouteElement_B))
         {
-            RouteElements = analyzer.FindShortestRouteBetween(
-                routeSource: RouteElement_A,
-                routeTarget: RouteElement_B
-            );
+            this.RouteElements = analyzer.FindShortestRouteBetween(
+                routeSource: this.RouteElement_A,
+                routeTarget: this.RouteElement_B);
 
-            RouteBuildResultMessage = "The Shortest Route was successfully built!";
+            this.RouteBuildResultMessage = "The Shortest Route was successfully built!";
         }
         else
         {
-            RouteElements = Array.Empty<BooleanElementInfo>();
-            RouteBuildResultMessage = "Cannot build the Shortest Route between elements!";
+            this.RouteElements = Array.Empty<BooleanElementInfo>();
+            this.RouteBuildResultMessage = "Cannot build the Shortest Route between elements!";
         }
     }
 
+    public CustomBooleanArray TargetArray { get; }
+
+    public (byte Row, byte Col) RouteElement_A { get; }
+
+    public (byte Row, byte Col) RouteElement_B { get; }
+
+    public BooleanElementInfo[] RouteElements { get; }
+
+    public string RouteBuildResultMessage { get; }
+
     public void OnGet()
     {
-        ViewData["Title"] = "Shortest Route Page";
+        this.ViewData["Title"] = "Shortest Route Page";
     }
 
     public string GetNodeElementValue(byte elementRow, byte elementCol)
     {
-        BooleanElementInfo element = new(elementRow, elementCol,
-            TargetArray.Content[elementRow, elementCol]);
+        BooleanElementInfo element = new (
+            elementRow, elementCol, this.TargetArray.Content[elementRow, elementCol]);
 
-        if (IsRouteSourceElement(element))
+        if (this.IsRouteSourceElement(element))
         {
             return "A";
         }
-        
-        if (IsRouteTargetElement(element))
+
+        if (this.IsRouteTargetElement(element))
         {
             return "B";
         }
 
-        if (RouteElements.Contains(element))
+        if (this.RouteElements.Contains(element))
         {
             return $"Node ({element.IsCharged})";
         }
@@ -68,14 +77,14 @@ public class ShortestRouteModel : PageModel
 
     public string GetElementClass(byte elementRow, byte elementCol)
     {
-        BooleanElementInfo element = new(elementRow, elementCol,
-            TargetArray.Content[elementRow, elementCol]);
+        BooleanElementInfo element = new (
+            elementRow, elementCol, this.TargetArray.Content[elementRow, elementCol]);
 
-        if ( IsRouteSourceElement(element) || IsRouteTargetElement(element) )
+        if (this.IsRouteSourceElement(element) || this.IsRouteTargetElement(element))
         {
             return "route_bound";
         }
-        else if (RouteElements.Contains(element))
+        else if (this.RouteElements.Contains(element))
         {
             return "route_node";
         }
@@ -86,8 +95,8 @@ public class ShortestRouteModel : PageModel
     }
 
     private bool IsRouteSourceElement(BooleanElementInfo element) =>
-        (element.Row == RouteElement_A.Row) && (element.Column == RouteElement_A.Col);
+        (element.Row == this.RouteElement_A.Row) && (element.Column == this.RouteElement_A.Col);
 
     private bool IsRouteTargetElement(BooleanElementInfo element) =>
-        (element.Row == RouteElement_B.Row) && (element.Column == RouteElement_B.Col);
+        (element.Row == this.RouteElement_B.Row) && (element.Column == this.RouteElement_B.Col);
 }

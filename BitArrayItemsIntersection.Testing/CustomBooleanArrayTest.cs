@@ -1,3 +1,16 @@
+//-----------------------------------------------------------------------
+// <copyright file="CustomBooleanArrayTest.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1413 // UseTrailingCommasInMultiLineInitializers
+#pragma warning disable SA1009 // ClosingParenthesisMustBeSpacedCorrectly
+#pragma warning disable SA1110 // OpeningParenthesisMustBeOnDeclarationLine
+#pragma warning disable SA1111 // ClosingParenthesisMustBeOnLineOfLastParameter
+#pragma warning disable SA1117 // ParametersMustBeOnSameLineOrSeparateLines
+
 using BitArrayItemsIntersection.Library;
 
 namespace BitArrayItemsIntersection.Testing;
@@ -194,7 +207,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void TestArrayColumns_TestCase_1()
     {
@@ -243,7 +255,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void ContentInitialization_ViaUserDefinedArray_TestCase_1()
     {
@@ -278,7 +289,6 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(array)
         );
     }
-
 
     [Test]
     public void ColumnsInitialization_ViaUserDefinedArray_TestCase_1()
@@ -342,7 +352,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void CreateBooleanArray_FromIntegerArray_TestCase_1()
     {
@@ -370,7 +379,7 @@ public class CustomBooleanArrayTest
         );
     }
 
-        [Test]
+    [Test]
     public void CreateBooleanArray_FromIntegerArray_TestCase_2()
     {
         Assert.That(
@@ -397,7 +406,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindAllChargedElements_TestCase_1()
     {
@@ -412,11 +420,11 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 0, charged: true),
-                    new(row: 0, column: 2, charged: true),
-                    new(row: 1, column: 1, charged: true),
-                    new(row: 2, column: 0, charged: true),
-                    new(row: 2, column: 2, charged: true)
+                    new (row: 0, column: 0, charged: true),
+                    new (row: 0, column: 2, charged: true),
+                    new (row: 1, column: 1, charged: true),
+                    new (row: 2, column: 0, charged: true),
+                    new (row: 2, column: 2, charged: true)
                 }
             )
         );
@@ -437,15 +445,14 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 1, charged: true),
-                    new(row: 1, column: 0, charged: true),
-                    new(row: 1, column: 2, charged: true),
-                    new(row: 2, column: 1, charged: true)
+                    new (row: 0, column: 1, charged: true),
+                    new (row: 1, column: 0, charged: true),
+                    new (row: 1, column: 2, charged: true),
+                    new (row: 2, column: 1, charged: true)
                 }
             )
         );
     }
-
 
     [Test]
     public void FindAllNonChargedElements_TestCase_1()
@@ -461,10 +468,10 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 1),
-                    new(row: 1, column: 0),
-                    new(row: 1, column: 2),
-                    new(row: 2, column: 1)
+                    new (row: 0, column: 1),
+                    new (row: 1, column: 0),
+                    new (row: 1, column: 2),
+                    new (row: 2, column: 1)
                 }
             )
         );
@@ -485,16 +492,15 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 0),
-                    new(row: 0, column: 2),
-                    new(row: 1, column: 1),
-                    new(row: 2, column: 0),
-                    new(row: 2, column: 2)
+                    new (row: 0, column: 0),
+                    new (row: 0, column: 2),
+                    new (row: 1, column: 1),
+                    new (row: 2, column: 0),
+                    new (row: 2, column: 2)
                 }
             )
         );
     }
-
 
     [Test]
     public void FindNeighbourElements_TopBound_TestCase()
@@ -511,11 +517,11 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 2),
-                    new(row: 1, column: 2),
-                    new(row: 1, column: 1),
-                    new(row: 1, column: 0),
-                    new(row: 0, column: 0)
+                    new (row: 0, column: 2),
+                    new (row: 1, column: 2),
+                    new (row: 1, column: 1),
+                    new (row: 1, column: 0),
+                    new (row: 0, column: 0)
                 }
             )
         );
@@ -536,9 +542,9 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 1, column: 2),
-                    new(row: 1, column: 1),
-                    new(row: 0, column: 1)
+                    new (row: 1, column: 2),
+                    new (row: 1, column: 1),
+                    new (row: 0, column: 1)
                 }
             )
         );
@@ -559,11 +565,11 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 2),
-                    new(row: 2, column: 2),
-                    new(row: 2, column: 1),
-                    new(row: 1, column: 1),
-                    new(row: 0, column: 1)
+                    new (row: 0, column: 2),
+                    new (row: 2, column: 2),
+                    new (row: 2, column: 1),
+                    new (row: 1, column: 1),
+                    new (row: 0, column: 1)
                 }
             )
         );
@@ -584,9 +590,9 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 1, column: 2),
-                    new(row: 2, column: 1),
-                    new(row: 1, column: 1)
+                    new (row: 1, column: 2),
+                    new (row: 2, column: 1),
+                    new (row: 1, column: 1)
                 }
             )
         );
@@ -607,11 +613,11 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 1, column: 1),
-                    new(row: 1, column: 2),
-                    new(row: 2, column: 2),
-                    new(row: 2, column: 0),
-                    new(row: 1, column: 0)
+                    new (row: 1, column: 1),
+                    new (row: 1, column: 2),
+                    new (row: 2, column: 2),
+                    new (row: 2, column: 0),
+                    new (row: 1, column: 0)
                 }
             )
         );
@@ -632,9 +638,9 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 1, column: 0),
-                    new(row: 1, column: 1),
-                    new(row: 2, column: 1)
+                    new (row: 1, column: 0),
+                    new (row: 1, column: 1),
+                    new (row: 2, column: 1)
                 }
             )
         );
@@ -655,11 +661,11 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 0),
-                    new(row: 0, column: 1),
-                    new(row: 1, column: 1),
-                    new(row: 2, column: 1),
-                    new(row: 2, column: 0)
+                    new (row: 0, column: 0),
+                    new (row: 0, column: 1),
+                    new (row: 1, column: 1),
+                    new (row: 2, column: 1),
+                    new (row: 2, column: 0)
                 }
             )
         );
@@ -680,9 +686,9 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 1),
-                    new(row: 1, column: 1),
-                    new(row: 1, column: 0)
+                    new (row: 0, column: 1),
+                    new (row: 1, column: 1),
+                    new (row: 1, column: 0)
                 }
             )
         );
@@ -703,20 +709,18 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(
                 new List<BooleanElementInfo>()
                 {
-                    new(row: 0, column: 1),
-                    new(row: 0, column: 2),
-                    new(row: 1, column: 2),
-                    new(row: 2, column: 2),
-                    new(row: 2, column: 1),
-                    new(row: 2, column: 0),
-                    new(row: 1, column: 0),
-                    new(row: 0, column: 0)
+                    new (row: 0, column: 1),
+                    new (row: 0, column: 2),
+                    new (row: 1, column: 2),
+                    new (row: 2, column: 2),
+                    new (row: 2, column: 1),
+                    new (row: 2, column: 0),
+                    new (row: 1, column: 0),
+                    new (row: 0, column: 0)
                 }
             )
         );
     }
-
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnTopIntersection_TrueToTrue()
@@ -749,7 +753,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnTopIntersection_FalseToFalse()
@@ -784,7 +787,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_OnTopToRightIntersection_TrueToTrue()
     {
@@ -816,7 +818,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnTopToRightIntersection_FalseToFalse()
@@ -851,7 +852,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_ToRightIntersection_TrueToTrue()
     {
@@ -883,7 +883,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_ToRightIntersection_FalseToFalse()
@@ -918,7 +917,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_OnBottomToRightIntersection_TrueToTrue()
     {
@@ -950,7 +948,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnBottomToRightIntersection_FalseToFalse()
@@ -985,7 +982,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_OnBottomIntersection_TrueToTrue()
     {
@@ -1017,7 +1013,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnBottomIntersection_FalseToFalse()
@@ -1052,7 +1047,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_OnBottomToLeftIntersection_TrueToTrue()
     {
@@ -1084,7 +1078,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnBottomToLeftIntersection_FalseToFalse()
@@ -1119,7 +1112,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_ToLeftIntersection_TrueToTrue()
     {
@@ -1151,7 +1143,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_ToLeftIntersection_FalseToFalse()
@@ -1186,7 +1177,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_OnTopToLeftIntersection_TrueToTrue()
     {
@@ -1218,7 +1208,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_OnTopToLeftIntersection_FalseToFalse()
@@ -1252,7 +1241,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_ManyIntersections_TrueToTrue()
@@ -1318,7 +1306,6 @@ public class CustomBooleanArrayTest
             )
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_ManyIntersections_FalseToFalse()
@@ -1386,7 +1373,6 @@ public class CustomBooleanArrayTest
         );
     }
 
-
     [Test]
     public void FindItemsIntersectionsTest_NoIntersections_TrueToTrue()
     {
@@ -1403,7 +1389,6 @@ public class CustomBooleanArrayTest
             expression: Is.EqualTo(new List<ItemsIntersectionInfo>())
         );
     }
-
 
     [Test]
     public void FindItemsIntersectionsTest_NoIntersections_FalseToFalse()

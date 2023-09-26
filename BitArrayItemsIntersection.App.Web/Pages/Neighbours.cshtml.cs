@@ -1,42 +1,51 @@
+//-----------------------------------------------------------------------
+// <copyright file="Neighbours.cshtml.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-using Microsoft.AspNetCore.Mvc.RazorPages;
+#pragma warning disable SA1600 // ElementsMustBeDocumented
+#pragma warning disable SA1649 // FileNameMustMatchTypeName
+
 using BitArrayItemsIntersection.Library;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class NeighboursModel : PageModel
 {
-    public readonly byte CurrentRow;
-    public readonly byte CurrentCol;
-
-    public readonly CustomBooleanArray TargetArray;
-    public readonly List<BooleanElementInfo> NeighbourElements;
-
     public NeighboursModel()
     {
-        CurrentRow = DataStore.CurrentElementRow;
-        CurrentCol = DataStore.CurrentElementCol;
+        this.CurrentRow = DataStore.CurrentElementRow;
+        this.CurrentCol = DataStore.CurrentElementCol;
 
-        TargetArray = DataStore.CurrentMatrixModel.TargetArray;
+        this.TargetArray = DataStore.CurrentMatrixModel.TargetArray;
 
-        NeighbourElements = TargetArray.FindNeighbourElementsAt(
-            elementRow: CurrentRow, elementColumn: CurrentCol
-        );
+        this.NeighbourElements = this.TargetArray.FindNeighbourElementsAt(
+            elementRow: this.CurrentRow, elementColumn: this.CurrentCol);
     }
+
+    public byte CurrentRow { get; }
+
+    public byte CurrentCol { get; }
+
+    public CustomBooleanArray TargetArray { get; }
+
+    public List<BooleanElementInfo> NeighbourElements { get; }
 
     public void OnGet()
     {
-        ViewData["Title"] = "Neighbours Page";
+        this.ViewData["Title"] = "Neighbours Page";
     }
 
     public string GetElementClass(byte elementRow, byte elementCol)
     {
-        BooleanElementInfo element = new(elementRow, elementCol,
-            TargetArray.Content[elementRow, elementCol]);
+        BooleanElementInfo element = new (
+            elementRow, elementCol, this.TargetArray.Content[elementRow, elementCol]);
 
-        if ( (element.Row == CurrentRow) && (element.Column == CurrentCol) )
+        if ((element.Row == this.CurrentRow) && (element.Column == this.CurrentCol))
         {
             return "current_element";
         }
-        else if (NeighbourElements.Contains(element))
+        else if (this.NeighbourElements.Contains(element))
         {
             return element.IsCharged ?
                 "neighbour_charged" : "neighbour_noncharged";

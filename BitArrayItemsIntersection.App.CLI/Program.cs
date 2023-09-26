@@ -1,19 +1,22 @@
-﻿using BitArrayItemsIntersection.Library;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Program.cs" company="Demo Projects Workshop">
+//     Copyright (c) Demo Projects Workshop. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using BitArrayItemsIntersection.Library;
 using static System.Console;
 
 CustomBooleanArray array = CreateUserDefinedArray(
     rows: ReadCustomDimensionLength("Input Array's Rows Dimension: "),
     columns: ReadCustomDimensionLength("Input Array's Columns Dimension: "),
-    valueSelectionKeyInfo: ReadCustomValueSelectionKey()
-);
+    valueSelectionKeyInfo: ReadCustomValueSelectionKey());
 
 PrintBooleanArray(array);
 
 ApplyUserActionToCustomArray(
     actionSelectionKeyInfo: ReadUserActionSelectionKey(),
-    array: array
-);
-
+    array: array);
 
 byte ReadCustomDimensionLength(string promptMessage)
 {
@@ -28,11 +31,10 @@ byte ReadCustomDimensionLength(string promptMessage)
         }
         else
         {
-            WriteLine("ERROR! Please input an integer from {0} to {1}",
-                byte.MinValue, byte.MaxValue);
+            WriteLine("ERROR! Please input an integer from {0} to {1}", byte.MinValue, byte.MaxValue);
         }
-
-    } while (true);
+    }
+    while (true);
 }
 
 ConsoleKeyInfo ReadCustomValueSelectionKey()
@@ -48,7 +50,7 @@ ConsoleKeyInfo ReadCustomValueSelectionKey()
         ConsoleKey.D,
         ConsoleKey.R,
         ConsoleKey.F,
-        ConsoleKey.T
+        ConsoleKey.T,
     };
 
     return ReadSelectionKey(possibleKeys);
@@ -70,23 +72,20 @@ ConsoleKeyInfo ReadSelectionKey(ConsoleKey[] availableKeys)
         {
             WriteLine("ERROR! Please select a possible key!");
         }
-
-    } while (true);
+    }
+    while (true);
 }
 
-CustomBooleanArray CreateUserDefinedArray(byte rows, byte columns,
-    ConsoleKeyInfo valueSelectionKeyInfo)
+CustomBooleanArray CreateUserDefinedArray(byte rows, byte columns, ConsoleKeyInfo valueSelectionKeyInfo)
 {
     switch (valueSelectionKeyInfo.Key)
     {
         case ConsoleKey.R:
             return CustomBooleanArray.GenerateRandomBooleanArray(rows, columns);
         case ConsoleKey.F:
-            return new CustomBooleanArray(rows, columns,
-                hasChargedElements: false);
+            return new CustomBooleanArray(rows, columns, hasChargedElements: false);
         case ConsoleKey.T:
-            return new CustomBooleanArray(rows, columns,
-                hasChargedElements: true);
+            return new CustomBooleanArray(rows, columns, hasChargedElements: true);
         default:
             return new CustomBooleanArray(rows, columns);
     }
@@ -94,15 +93,13 @@ CustomBooleanArray CreateUserDefinedArray(byte rows, byte columns,
 
 void PrintBooleanArray(CustomBooleanArray array)
 {
-    WriteLine("\nCustomBooleanArray: X = {0}, Y = {1}\n",
-        array.CountOfColumns, array.CountOfRows);
+    WriteLine("\nCustomBooleanArray: X = {0}, Y = {1}\n", array.CountOfColumns, array.CountOfRows);
 
     for (byte row = 0; row < array.CountOfRows; row++)
     {
         for (byte column = 0; column < array.CountOfColumns; column++)
         {
-            WriteLine("array[ X: {0}, Y: {1} ] = {2}",
-                column, row, array.Content[row, column]);
+            WriteLine("array[ X: {0}, Y: {1} ] = {2}", column, row, array.Content[row, column]);
         }
 
         WriteLine();
@@ -110,7 +107,6 @@ void PrintBooleanArray(CustomBooleanArray array)
 
     WriteLine();
 }
-
 
 ConsoleKeyInfo ReadUserActionSelectionKey()
 {
@@ -121,14 +117,13 @@ ConsoleKeyInfo ReadUserActionSelectionKey()
     ConsoleKey[] possibleKeys = new[]
     {
         ConsoleKey.D1,
-        ConsoleKey.D2
+        ConsoleKey.D2,
     };
 
     return ReadSelectionKey(possibleKeys);
 }
 
-void ApplyUserActionToCustomArray(ConsoleKeyInfo actionSelectionKeyInfo,
-    CustomBooleanArray array)
+void ApplyUserActionToCustomArray(ConsoleKeyInfo actionSelectionKeyInfo, CustomBooleanArray array)
 {
     switch (actionSelectionKeyInfo.Key)
     {
@@ -188,7 +183,7 @@ void GetShortestRouteBetweenElements(CustomBooleanArray array)
 
     WriteLine("\nRESULTS:\n");
 
-    BooleanArrayAnalyzer analyzer = new(array);
+    BooleanArrayAnalyzer analyzer = new (array);
 
     if (analyzer.CanTryToMakeRouteBetweenArrayElements(from: element_A, to: element_B))
     {
@@ -225,9 +220,8 @@ byte ReadElementIndex(string promptMessage, byte maxAvailableIndex)
         }
         else
         {
-            WriteLine("ERROR! Please input an integer from {0} to {1}",
-                byte.MinValue, maxAvailableIndex);
+            WriteLine("ERROR! Please input an integer from {0} to {1}", byte.MinValue, maxAvailableIndex);
         }
-
-    } while (true);
+    }
+    while (true);
 }
