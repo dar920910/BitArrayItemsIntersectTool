@@ -1,58 +1,111 @@
 @page
 @model MatrixModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-<div class="row">
-    <h1 class="display-2">Explore a New Matrix: </h1>
-    <h2>This Matrix has @DataStore.CurrentArray.CountOfRows rows and @DataStore.CurrentArray.CountOfColumns columns</h2>
+<div class="container text-center">
+    <h2 class="display-1">Your Boolean Array Is Ready !</h2>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h2>Rows Dimension:</h2>
+        </div>
+        <div class="col">
+            <h2>Columns Dimension:</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h2 class="display-3">@DataStore.CurrentArray.CountOfRows</h2>
+        </div>
+        <div class="col">
+            <h2 class="display-3">@DataStore.CurrentArray.CountOfColumns</h2>
+        </div>
+    </div>
 </div>
 <hr>
-<div>
-    <h4>Get Element's Intersections by Coordinates</h4>
-    <p>Available Coordinates: Rows - from 0 to @DataStore.LastElement.Row, Columns - from 0 to @DataStore.LastElement.Column</p>
+<div class="container text-center">
+    <div class="row">
+        <h4 class="display-3">Get Element's Intersections by Coordinates</h4>
+    </div>
+    <br>
     <form asp-page-handler="FindElementNeighbours" method="POST">
-        <div>
-        <label class="form-label">Select Element's Row:</label>
-        <input asp-for="SelectedElementRow"
-            min="0" max="@DataStore.LastElement.Row" step="1"/>
+        <div class="row">
+            <div class="col">
+                <h2>Select Element's Row</h2>
+                <h4>[ 0 ... @DataStore.LastElement.Row ]</h4>
+            </div>
+            <div class="col">
+                <h2>Select Element's Column</h2>
+                <h4>[ 0 ... @DataStore.LastElement.Column ]</h4>
+            </div>
         </div>
-        <div>
-        <label class="form-label">Select Element's Column:</label>
-        <input asp-for="SelectedElementCol"
-            min="0" max="@DataStore.LastElement.Column" step="1"/>
+        <div class="row">
+            <div class="col">
+                <input type="number" class="custom_element" asp-for="SelectedElementRow" min="0" max="@DataStore.LastElement.Row" step="1"/>
+            </div>
+            <div class="col">
+                <input type="number" class="custom_element" asp-for="SelectedElementCol" min="0" max="@DataStore.LastElement.Column" step="1"/>
+            </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Find Intersections"/>
+        <br>
+        <div class="row">
+            <input type="submit" class="btn btn-primary" value="Find Intersections"/>
+        </div>
     </form>
 </div>
 <hr>
-<div>
-    <h4>Find the Shortest Route between Two Elements</h4>
-    <p>Available Coordinates: Rows - from 0 to @DataStore.LastElement.Row, Columns - from 0 to @DataStore.LastElement.Column</p>
+<div class="container text-center">
+    <div class="row">
+        <h4 class="display-3">Find the Shortest Route between Two Elements</h4>
+    </div>
+    <br>
     <form asp-page-handler="FindShortestRouteBetweenElements" method="POST">
-        <div>
-            <div>
-                <label class="form-label">Input a Row Index for the Element A:</label>
-                <input asp-for="RouteElementRow_A" min="0" max="@DataStore.LastElement.Row" step="1" value="0"/>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Select Element A:</h2>
             </div>
-            <div>
-                <label class="form-label">Input a Col Index for the Element A:</label>
-                <input asp-for="RouteElementCol_A" min="0" max="@DataStore.LastElement.Column" step="1" value="0"/>
+            <div class="col">
+                <h2>Select Element B:</h2>
             </div>
         </div>
-        <div>
-            <div>
-                <label for="row_B" class="form-label">Input a Row Index for the Element B:</label>
-                <input asp-for="RouteElementRow_B" min="0" max="@DataStore.LastElement.Row" step="1" value="@DataStore.LastElement.Row"/>
+        <div class="row">
+            <div class="col">
+                <h5 class="form-label">Element's A Row Index:</h5>
+                <input type="number" class="custom_element" asp-for="RouteElementRow_A"
+                    min="0" max="@DataStore.LastElement.Row" step="1" value="0"/>
             </div>
-            <div>
-                <label for="col_B" class="form-label">Input a Column Index for the Element B:</label>
-                <input asp-for="RouteElementCol_B" min="0" max="@DataStore.LastElement.Column" step="1" value="@DataStore.LastElement.Column"/>
+            <div class="col">
+                <h5 class="form-label">Element's B Row Index:</h5>
+                <input type="number" class="custom_element" asp-for="RouteElementRow_B"
+                    min="0" max="@DataStore.LastElement.Row" step="1" value="@DataStore.LastElement.Row"/>
             </div>
         </div>
-        <input type="submit" class="btn btn-primary" value="Find the Shortest Route"/>
+        <br>
+        <div class="row">
+            <div class="col">
+                <h5 class="form-label">Element's A Column Index:</h5>
+                <input type="number" class="custom_element" asp-for="RouteElementCol_A"
+                    min="0" max="@DataStore.LastElement.Column" step="1" value="0"/>
+            </div>
+            <div class="col">
+                <h5 class="form-label">Element's B Column Index:</h5>
+                <input type="number" class="custom_element" asp-for="RouteElementCol_B"
+                    min="0" max="@DataStore.LastElement.Column" step="1" value="@DataStore.LastElement.Column"/>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <input type="submit" class="btn btn-primary" value="Find the Shortest Route"/>
+        </div>
     </form>
 </div>
 <hr>
-<div>
+<div class="container text-center">
+    <div class="row">
+        <h4 class="display-3">Explore the Content of This Boolean Array</h4>
+    </div>
+    <br>
     @if (DataStore.CurrentArray.Content is not null)
     {
         <table class="table">
@@ -85,7 +138,10 @@
     }
 </div>
 <hr>
-<a class="btn btn-primary" href="/">Return to Home Page</a>
+<div class="container text-center"></div>
+    <div class="row">
+        <a class="btn btn-primary" href="/">Return to Home Page</a>
+    </div>
 <script>
     function updateSelectedElement(row, col) {
 

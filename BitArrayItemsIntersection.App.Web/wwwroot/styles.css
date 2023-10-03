@@ -1,3 +1,17 @@
+h3.display-6 {
+    text-align: center;
+}
+
+input.dimension {
+    width: 250px;
+    text-align: center;
+}
+
+input.custom_element {
+    width: 250px;
+    text-align: center;
+}
+
 td {
     color: black;
     text-align: center;

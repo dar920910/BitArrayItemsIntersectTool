@@ -2,24 +2,37 @@
 @model IndexModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <div class="jumbotron">
-    <h1 class="display-2">Welcome to BitArrayItemsIntersectionTool !</h1>
+    <h1 class="display-4">Welcome to the Boolean Array Items Intersection Tool !</h1>
     <hr />
-    <h2>Select Count of Rows and Columns to Create a New Custom Array</h2>
-    <p>Note: Your maximum dimension value cannot be more that 100!</p>
-    <form method="POST">
-        <div>
-            <label class="form-label">Custom Rows Dimension:</label>
-            <input asp-for="CustomRowsDimension"
-                min="0" max="100" step="1" value="@Model.CustomRowsDimension"
-                onchange="logRangeValue_X();"/>
-        </div>
-        <div>
-            <label class="form-label">Custom Cols Dimension:</label>
-            <input asp-for="CustomColsDimension"
-                min="0" max="100" step="1" value="@Model.CustomColsDimension"
-                onchange="logRangeValue_Y();"/>
-        </div>
-        <input type="submit" class="btn btn-primary" value="Create a New Array"/>
-    </form>
+    <div class="container text-center">
+        <form method="POST">
+            <div class="row">
+                <div class="col">
+                    <h6 class="display-6">Select Rows Dimension:</h6>
+                    </div>
+                <div class="col">
+                    <h6 class="display-6">Select Columns Dimension:</h6>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    
+                    <input type="number" class="dimension" asp-for="CustomRowsDimension"
+                        min="0" max="100" step="1" value="@Model.CustomRowsDimension"
+                            onchange="logRangeValue_X();"/>
+                </div>
+                <div class="col">
+                    
+                    <input type="number" class="dimension" asp-for="CustomColsDimension"
+                        min="0" max="100" step="1" value="@Model.CustomColsDimension"
+                            onchange="logRangeValue_Y();"/>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <input type="submit" class="btn btn-primary" value="Create a New Array"/>
+            </div>
+        </form>
+    </div>
 </div>
 <script src="scripts.js"></script>
