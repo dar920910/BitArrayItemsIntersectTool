@@ -7,16 +7,18 @@
 using BitArrayItemsIntersection.Library;
 using static System.Console;
 
-CustomBooleanArray array = CreateUserDefinedArray(
-    rows: ReadCustomDimensionLength("Input Array's Rows Dimension: "),
-    columns: ReadCustomDimensionLength("Input Array's Columns Dimension: "),
-    valueSelectionKeyInfo: ReadCustomValueSelectionKey());
+// 1. Initialize a new custom boolean array via user-defined input.
+byte customRowsDimension = ReadCustomDimensionLength("Input Array's Rows Dimension: ");
+byte customColsDimension = ReadCustomDimensionLength("Input Array's Columns Dimension: ");
+ConsoleKeyInfo customInputKeyInfo = ReadCustomValueSelectionKey();
 
+// 2. Create and print the content of a new custom boolean array.
+CustomBooleanArray array = CreateUserDefinedArray(customRowsDimension, customColsDimension, customInputKeyInfo);
 PrintBooleanArray(array);
 
-ApplyUserActionToCustomArray(
-    actionSelectionKeyInfo: ReadUserActionSelectionKey(),
-    array: array);
+// 3. Select an action and apply it to the custom boolean array.
+ConsoleKeyInfo customActionKeyInfo = ReadUserActionSelectionKey();
+ApplyUserActionToCustomArray(customActionKeyInfo, array);
 
 byte ReadCustomDimensionLength(string promptMessage)
 {
@@ -93,13 +95,13 @@ CustomBooleanArray CreateUserDefinedArray(byte rows, byte columns, ConsoleKeyInf
 
 void PrintBooleanArray(CustomBooleanArray array)
 {
-    WriteLine("\nCustomBooleanArray: X = {0}, Y = {1}\n", array.CountOfColumns, array.CountOfRows);
+    WriteLine($"\nCustomBooleanArray: X = {array.CountOfColumns}, Y = {array.CountOfRows}\n");
 
     for (byte row = 0; row < array.CountOfRows; row++)
     {
         for (byte column = 0; column < array.CountOfColumns; column++)
         {
-            WriteLine("array[ X: {0}, Y: {1} ] = {2}", column, row, array.Content[row, column]);
+            WriteLine($"array[ X: {column}, Y: {row} ] = {array.Content[row, column]}");
         }
 
         WriteLine();
@@ -184,7 +186,6 @@ void GetShortestRouteBetweenElements(CustomBooleanArray array)
     WriteLine("\nRESULTS:\n");
 
     BooleanArrayAnalyzer analyzer = new (array);
-
     if (analyzer.CanTryToMakeRouteBetweenArrayElements(from: element_A, to: element_B))
     {
         BooleanElementInfo[] routeNodes = analyzer.FindShortestRouteBetween(
@@ -220,7 +221,7 @@ byte ReadElementIndex(string promptMessage, byte maxAvailableIndex)
         }
         else
         {
-            WriteLine("ERROR! Please input an integer from {0} to {1}", byte.MinValue, maxAvailableIndex);
+            WriteLine($"ERROR! Please input an integer from {byte.MinValue} to {maxAvailableIndex}");
         }
     }
     while (true);
