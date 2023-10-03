@@ -21,6 +21,7 @@ I added more features to its initial idea and extended project's codebase infras
 There are two important areas which should be improved when further development of this project:
 
 :collision: Check conditions when finding the route between two elements is either impossible or unsecure, i.e. can cause to throwing runtime exception when detecting a route.
+
 :collision: Improve algorithms of finding the shortest route between two elements because its current implementation is created as a minimalistic start point for further investigation in this scope.
 
 ## :question: About the Repository Structure
