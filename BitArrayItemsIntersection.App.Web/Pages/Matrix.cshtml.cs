@@ -15,24 +15,12 @@ public class MatrixModel : PageModel
 {
     public MatrixModel()
     {
-        this.TargetArray = CustomBooleanArray.GenerateRandomBooleanArray(
-            rows: DataStore.ArrayRowsDimension,
-            columns: DataStore.ArrayColsDimension);
-
-        this.LastElement = (
-            Row: Convert.ToByte(this.TargetArray.CountOfRows - 1),
-            Column: Convert.ToByte(this.TargetArray.CountOfColumns - 1));
-
         this.RouteElementRow_A = 0;
         this.RouteElementCol_A = 0;
 
-        this.RouteElementRow_B = this.LastElement.Row;
-        this.RouteElementCol_B = this.LastElement.Column;
+        this.RouteElementRow_B = DataStore.LastElement.Row;
+        this.RouteElementCol_B = DataStore.LastElement.Column;
     }
-
-    public CustomBooleanArray TargetArray { get; }
-
-    public (byte Row, byte Column) LastElement { get; }
 
     [BindProperty]
     public byte SelectedElementRow { get; set; }
@@ -64,9 +52,8 @@ public class MatrixModel : PageModel
     {
         if (this.ModelState.IsValid)
         {
-            DataStore.CurrentMatrixModel = this;
-            DataStore.CurrentElementRow = this.SelectedElementRow;
-            DataStore.CurrentElementCol = this.SelectedElementCol;
+            DataStore.InitializeNeighbourElements(
+                this.SelectedElementRow, this.SelectedElementCol);
 
             return this.RedirectToPage("/neighbours");
         }
@@ -80,9 +67,9 @@ public class MatrixModel : PageModel
     {
         if (this.ModelState.IsValid)
         {
-            DataStore.CurrentMatrixModel = this;
-            DataStore.RouteElement_A = (this.RouteElementRow_A, this.RouteElementCol_A);
-            DataStore.RouteElement_B = (this.RouteElementRow_B, this.RouteElementCol_B);
+            DataStore.InitializeShortestRouteBetweenElements(
+                element_A: (this.RouteElementRow_A, this.RouteElementCol_A),
+                element_B: (this.RouteElementRow_B, this.RouteElementCol_B));
 
             return this.RedirectToPage("/shortestroute");
         }

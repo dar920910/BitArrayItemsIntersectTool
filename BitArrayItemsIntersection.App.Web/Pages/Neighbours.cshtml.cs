@@ -14,22 +14,7 @@ public class NeighboursModel : PageModel
 {
     public NeighboursModel()
     {
-        this.CurrentRow = DataStore.CurrentElementRow;
-        this.CurrentCol = DataStore.CurrentElementCol;
-
-        this.TargetArray = DataStore.CurrentMatrixModel.TargetArray;
-
-        this.NeighbourElements = this.TargetArray.FindNeighbourElementsAt(
-            elementRow: this.CurrentRow, elementColumn: this.CurrentCol);
     }
-
-    public byte CurrentRow { get; }
-
-    public byte CurrentCol { get; }
-
-    public CustomBooleanArray TargetArray { get; }
-
-    public List<BooleanElementInfo> NeighbourElements { get; }
 
     public void OnGet()
     {
@@ -39,13 +24,13 @@ public class NeighboursModel : PageModel
     public string GetElementClass(byte elementRow, byte elementCol)
     {
         BooleanElementInfo element = new (
-            elementRow, elementCol, this.TargetArray.Content[elementRow, elementCol]);
+            elementRow, elementCol, DataStore.CurrentArray.Content[elementRow, elementCol]);
 
-        if ((element.Row == this.CurrentRow) && (element.Column == this.CurrentCol))
+        if ((element.Row == DataStore.CurrentElementRow) && (element.Column == DataStore.CurrentElementCol))
         {
             return "current_element";
         }
-        else if (this.NeighbourElements.Contains(element))
+        else if (DataStore.NeighbourElements.Contains(element))
         {
             return element.IsCharged ?
                 "neighbour_charged" : "neighbour_noncharged";

@@ -3,22 +3,22 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <div class="row">
     <h1 class="display-2">Explore a New Matrix: </h1>
-    <h2>This Matrix has @Model.TargetArray.CountOfRows rows and @Model.TargetArray.CountOfColumns columns</h2>
+    <h2>This Matrix has @DataStore.CurrentArray.CountOfRows rows and @DataStore.CurrentArray.CountOfColumns columns</h2>
 </div>
 <hr>
 <div>
     <h4>Get Element's Intersections by Coordinates</h4>
-    <p>Available Coordinates: Rows - from 0 to @Model.LastElement.Row, Columns - from 0 to @Model.LastElement.Column</p>
+    <p>Available Coordinates: Rows - from 0 to @DataStore.LastElement.Row, Columns - from 0 to @DataStore.LastElement.Column</p>
     <form asp-page-handler="FindElementNeighbours" method="POST">
         <div>
         <label class="form-label">Select Element's Row:</label>
         <input asp-for="SelectedElementRow"
-            min="0" max="@Model.LastElement.Row" step="1"/>
+            min="0" max="@DataStore.LastElement.Row" step="1"/>
         </div>
         <div>
         <label class="form-label">Select Element's Column:</label>
         <input asp-for="SelectedElementCol"
-            min="0" max="@Model.LastElement.Column" step="1"/>
+            min="0" max="@DataStore.LastElement.Column" step="1"/>
         </div>
         <input type="submit" class="btn btn-primary" value="Find Intersections"/>
     </form>
@@ -26,26 +26,26 @@
 <hr>
 <div>
     <h4>Find the Shortest Route between Two Elements</h4>
-    <p>Available Coordinates: Rows - from 0 to @Model.LastElement.Row, Columns - from 0 to @Model.LastElement.Column</p>
+    <p>Available Coordinates: Rows - from 0 to @DataStore.LastElement.Row, Columns - from 0 to @DataStore.LastElement.Column</p>
     <form asp-page-handler="FindShortestRouteBetweenElements" method="POST">
         <div>
             <div>
                 <label class="form-label">Input a Row Index for the Element A:</label>
-                <input asp-for="RouteElementRow_A" min="0" max="@Model.LastElement.Row" step="1" value="0"/>
+                <input asp-for="RouteElementRow_A" min="0" max="@DataStore.LastElement.Row" step="1" value="0"/>
             </div>
             <div>
                 <label class="form-label">Input a Col Index for the Element A:</label>
-                <input asp-for="RouteElementCol_A" min="0" max="@Model.LastElement.Column" step="1" value="0"/>
+                <input asp-for="RouteElementCol_A" min="0" max="@DataStore.LastElement.Column" step="1" value="0"/>
             </div>
         </div>
         <div>
             <div>
                 <label for="row_B" class="form-label">Input a Row Index for the Element B:</label>
-                <input asp-for="RouteElementRow_B" min="0" max="@Model.LastElement.Row" step="1" value="@Model.LastElement.Row"/>
+                <input asp-for="RouteElementRow_B" min="0" max="@DataStore.LastElement.Row" step="1" value="@DataStore.LastElement.Row"/>
             </div>
             <div>
                 <label for="col_B" class="form-label">Input a Column Index for the Element B:</label>
-                <input asp-for="RouteElementCol_B" min="0" max="@Model.LastElement.Column" step="1" value="@Model.LastElement.Column"/>
+                <input asp-for="RouteElementCol_B" min="0" max="@DataStore.LastElement.Column" step="1" value="@DataStore.LastElement.Column"/>
             </div>
         </div>
         <input type="submit" class="btn btn-primary" value="Find the Shortest Route"/>
@@ -53,26 +53,26 @@
 </div>
 <hr>
 <div>
-    @if (Model.TargetArray.Content is not null)
+    @if (DataStore.CurrentArray.Content is not null)
     {
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col" style="color: white; background-color: black;">#</th>
-                @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (int @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
                     <th scope="col" style="color: white; background-color: black;">Column: @column</th>
                 }
                 </tr>
             </thead>
             <tbody>
-            @for (byte @row = 0; @row < @Model.TargetArray.CountOfRows; @row++)
+            @for (byte @row = 0; @row < @DataStore.CurrentArray.CountOfRows; @row++)
             {
                 <tr>
                     <th scope="row" style="color: white; background-color: black;">Row: @row</th>
-                @for (byte @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (byte @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
-                    bool @elementCharge = @Model.TargetArray.Content[@row, @column];
+                    bool @elementCharge = @DataStore.CurrentArray.Content[@row, @column];
                     <td class="@MatrixModel.GetElementClass(@elementCharge)"
                         onclick="updateSelectedElement(`${@row}`, `${@column}`);">
                         @elementCharge

@@ -33,8 +33,8 @@ public class IndexModel : PageModel
     {
         if (this.ModelState.IsValid)
         {
-            DataStore.ArrayRowsDimension = this.CustomRowsDimension;
-            DataStore.ArrayColsDimension = this.CustomColsDimension;
+            DataStore.InitializeCustomArray(
+                rows: this.CustomRowsDimension, cols: this.CustomColsDimension);
 
             return this.RedirectToPage("/matrix");
         }

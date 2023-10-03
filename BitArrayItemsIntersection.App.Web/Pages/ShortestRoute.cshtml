@@ -8,13 +8,13 @@
 </div>
 <div>
     <h3>
-        From Element A: [ Row: <label>@Model.RouteElement_A.Row</label> ; Column: <label>@Model.RouteElement_A.Col</label> ]
-             To Element B: [ Row: <label>@Model.RouteElement_B.Row</label> ; Column: <label>@Model.RouteElement_B.Col</label> ]
+        From Element A: [ Row: <label>@DataStore.RouteElement_A.Row</label> ; Column: <label>@DataStore.RouteElement_A.Col</label> ]
+             To Element B: [ Row: <label>@DataStore.RouteElement_B.Row</label> ; Column: <label>@DataStore.RouteElement_B.Col</label> ]
     </h3>
 </div>
 <hr>
 <div>
-    @if (Model.RouteElements is not null)
+    @if (DataStore.RouteElements is not null)
     {
         <h4>Route Elements Between the Element A and the Element B</h4>
         <p>RESULT: @Model.RouteBuildResultMessage</p>
@@ -28,9 +28,9 @@
                 </tr>
             </thead>
             <tbody>
-                @for (byte @index = 0; @index < @Model.RouteElements.Length; @index++)
+                @for (byte @index = 0; @index < @DataStore.RouteElements.Length; @index++)
                 {
-                    BooleanElementInfo @element = @Model.RouteElements[@index];
+                    BooleanElementInfo @element = @DataStore.RouteElements[@index];
                     <tr>
                         <th scope="row" style="color: white; background-color: black;">Node # @index</th>
                         <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.Row</td>
@@ -44,24 +44,24 @@
 </div>
 <hr>
 <div>
-    @if (Model.TargetArray.Content is not null)
+    @if (DataStore.CurrentArray.Content is not null)
     {
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col" style="color: white; background-color: black;">#</th>
-                @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (int @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
                     <th scope="col" style="color: white; background-color: black;">Column: @column</th>
                 }
                 </tr>
             </thead>
             <tbody>
-            @for (byte @row = 0; @row < @Model.TargetArray.CountOfRows; @row++)
+            @for (byte @row = 0; @row < @DataStore.CurrentArray.CountOfRows; @row++)
             {
                 <tr>
                     <th scope="row" style="color: white; background-color: black;">Row: @row</th>
-                @for (byte @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (byte @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
                     <td class="@Model.GetElementClass(@row, @column)">@Model.GetNodeElementValue(@row, @column)</td>
                 }

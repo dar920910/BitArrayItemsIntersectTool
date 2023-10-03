@@ -10,13 +10,13 @@
 <div>
     <h3>
         Current Element: 
-            [ Row: <label id="current_row">@Model.CurrentRow</label> ; 
-                Column: <label id="current_col">@Model.CurrentCol</label> ]
+            [ Row: <label id="current_row">@DataStore.CurrentElementRow</label> ; 
+                Column: <label id="current_col">@DataStore.CurrentElementCol</label> ]
     </h3>
 </div>
 <hr>
 <div>
-    @if (Model.NeighbourElements is not null)
+    @if (DataStore.NeighbourElements is not null)
     {
         <h4>Detected Neighbours of the Current Element</h4>
         <table class="table table-bordered">
@@ -29,9 +29,9 @@
                 </tr>
             </thead>
             <tbody>
-                @for (byte @index = 0; @index < @Model.NeighbourElements.Count; @index++)
+                @for (byte @index = 0; @index < @DataStore.NeighbourElements.Count; @index++)
                 {
-                    BooleanElementInfo @element = @Model.NeighbourElements.ElementAt(@index);
+                    BooleanElementInfo @element = @DataStore.NeighbourElements.ElementAt(@index);
 
                     <tr>
                         <th scope="row" style="color: white; background-color: black;">Neighbour: @index</th>
@@ -46,27 +46,27 @@
 </div>
 <hr>
 <div>
-    @if (Model.TargetArray.Content is not null)
+    @if (DataStore.CurrentArray.Content is not null)
     {
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col" style="color: white; background-color: black;">#</th>
-                @for (int @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (int @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
                     <th scope="col" style="color: white; background-color: black;">Column: @column</th>
                 }
                 </tr>
             </thead>
             <tbody>
-            @for (byte @row = 0; @row < @Model.TargetArray.CountOfRows; @row++)
+            @for (byte @row = 0; @row < @DataStore.CurrentArray.CountOfRows; @row++)
             {
                 <tr>
                     <th scope="row" style="color: white; background-color: black;">Row: @row</th>
-                @for (byte @column = 0; @column < @Model.TargetArray.CountOfColumns; @column++)
+                @for (byte @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
                     <td class="@Model.GetElementClass(@row, @column)">
-                        @Model.TargetArray.Content[@row, @column]
+                        @DataStore.CurrentArray.Content[@row, @column]
                     </td>
                 }
                 </tr>
