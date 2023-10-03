@@ -1,40 +1,33 @@
-@page "/shortestroute"
-@using BitArrayItemsIntersection.Library
-@model ShortestRouteModel
+@page "/neighbours"
+@using BooleanArrayExploring.Library
+@model NeighboursModel
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="container text-center">
     <div class="row">
-        <h2 class="display-4">Explore the Shortest Route between A and B Elements</h2>
+        <h2 class="display-4">Explore Neighbours of the Selected Element</h4>
     </div>
-</div>
-<hr>
-<div class="container text-center">
+    <hr>
     <div class="row">
-        <div class="col">
-            <h2>Element A:</h2>
-        </div>
-        <div class="col">
-            <h2>Element B:</h2>
-        </div>
+        <h2 class="display-6">Current Element Indexes</h2>
     </div>
     <br>
     <div class="row">
         <div class="col">
-            <h3 id="current_row">[ Row: @DataStore.RouteElement_A.Row, Column: @DataStore.RouteElement_A.Col ]</h3>
+            <h3 id="current_row">Row: @DataStore.CurrentElementRow</h3>
         </div>
         <div class="col">
-            <h3 id="current_row">[ Row: @DataStore.RouteElement_B.Row, Column: @DataStore.RouteElement_B.Col ]</h3>
+            <h3 id="current_col">Column: @DataStore.CurrentElementCol</h3>
         </div>
     </div>
 </div>
 <hr>
 <div class="container text-center">
     <div class="row">
-        <h4 class="display-6">Explore Route Elements Between the Element A and the Element B</h4>
+        <h4 class="display-6">Explore Info About Detected Neighbours for the Current Element</h4>
     </div>
     <br>
-    @if (DataStore.RouteElements is not null)
+    @if (DataStore.NeighbourElements is not null)
     {
         <table class="table table-bordered">
             <thead>
@@ -46,11 +39,12 @@
                 </tr>
             </thead>
             <tbody>
-                @for (byte @index = 0; @index < @DataStore.RouteElements.Length; @index++)
+                @for (byte @index = 0; @index < @DataStore.NeighbourElements.Count; @index++)
                 {
-                    BooleanElementInfo @element = @DataStore.RouteElements[@index];
+                    BooleanElementInfo @element = @DataStore.NeighbourElements.ElementAt(@index);
+
                     <tr>
-                        <th scope="row" style="color: white; background-color: black;">Node # @index</th>
+                        <th scope="row" style="color: white; background-color: black;">Neighbour: @index</th>
                         <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.Row</td>
                         <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.Column</td>
                         <td class="@MatrixModel.GetElementClass(@element.IsCharged)">@element.IsCharged</td>
@@ -63,7 +57,7 @@
 <hr>
 <div class="container text-center">
     <div class="row">
-        <h4 class="display-6">Explore Elements of The Route in This Boolean Array</h4>
+        <h4 class="display-6">Explore Locations Of Neighbours Elements in This Boolean Array</h4>
     </div>
     <br>
     @if (DataStore.CurrentArray.Content is not null)
@@ -85,7 +79,9 @@
                     <th scope="row" style="color: white; background-color: black;">Row: @row</th>
                 @for (byte @column = 0; @column < @DataStore.CurrentArray.CountOfColumns; @column++)
                 {
-                    <td class="@Model.GetElementClass(@row, @column)">@Model.GetNodeElementValue(@row, @column)</td>
+                    <td class="@Model.GetElementClass(@row, @column)">
+                        @DataStore.CurrentArray.Content[@row, @column]
+                    </td>
                 }
                 </tr>
             }

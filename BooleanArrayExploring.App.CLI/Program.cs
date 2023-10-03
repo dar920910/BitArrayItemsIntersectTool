@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using BitArrayItemsIntersection.Library;
+using BooleanArrayExploring.Library;
 using static System.Console;
 
 // 1. Initialize a new custom boolean array via user-defined input.

@@ -1,4 +1,4 @@
-# BitArrayItemsIntersectTool
+# Boolean Array Explore Tool
 
 ## About the Project
 
@@ -11,10 +11,10 @@ This project implements a tool for processing elements of a custom two-dimension
 
 This repository contains the following projects:
 
-- "BitArrayItemsIntersection.Library"
-- "BitArrayItemsIntersection.Testing"
-- "BitArrayItemsIntersection.App.CLI"
-- "BitArrayItemsIntersection.App.Web"
+- "BooleanArrayExploreTool.Library"
+- "BooleanArrayExploreTool.Testing"
+- "BooleanArrayExploreTool.App.CLI"
+- "BooleanArrayExploreTool.App.Web"
 
 ## Prerequisites
 

@@ -1,1 +1,1 @@
-docker run --rm --interactive --tty --publish 5001:80 --publish 5002:443 --volume $env:USERPROFILE\.aspnet\https:/https/ bitarray_items_intersection /bin/bash -c "cd /usr/local/bin/BitArrayItemsIntersectTool/Web/ && dotnet BitArrayItemsIntersection.App.Web.dll"
+docker run --rm --interactive --tty --publish 5001:80 --publish 5002:443 --volume $env:USERPROFILE\.aspnet\https:/https/ boolean_array_exploring /bin/bash -c "cd /usr/local/bin/BooleanArrayExploreTool/Web/ && dotnet BooleanArrayExploring.App.Web.dll"

@@ -1,1 +1,1 @@
-docker run --interactive --tty --rm bitarray_items_intersection /usr/local/bin/BitArrayItemsIntersectTool/CLI/BitArrayItemsIntersection.App.CLI
+docker run --interactive --tty --rm boolean_array_exploring /usr/local/bin/BooleanArrayExploreTool/CLI/BooleanArrayExploring.App.CLI

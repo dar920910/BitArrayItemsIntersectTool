@@ -1,1 +1,1 @@
-docker run --interactive --tty --rm bitarray_items_intersection /bin/bash -c "cd /usr/local/src/BitArrayItemsIntersectTool/BitArrayItemsIntersection.Testing && dotnet test"
+docker run --interactive --tty --rm boolean_array_exploring /bin/bash -c "cd /usr/local/src/BooleanArrayExploreTool/BooleanArrayExploring.Testing && dotnet test"

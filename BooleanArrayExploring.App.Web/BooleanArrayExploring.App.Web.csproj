@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <ProjectReference Include="..\BitArrayItemsIntersection.Library\BitArrayItemsIntersection.Library.csproj" />
+    <ProjectReference Include="..\BooleanArrayExploring.Library\BooleanArrayExploring.Library.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "BitArrayItemsIntersection.App.Web": {
+    "BooleanArrayExploring.App.Web": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

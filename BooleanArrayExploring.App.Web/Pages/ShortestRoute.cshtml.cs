@@ -7,7 +7,7 @@
 #pragma warning disable SA1600 // ElementsMustBeDocumented
 #pragma warning disable SA1649 // FileNameMustMatchTypeName
 
-using BitArrayItemsIntersection.Library;
+using BooleanArrayExploring.Library;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 public class ShortestRouteModel : PageModel

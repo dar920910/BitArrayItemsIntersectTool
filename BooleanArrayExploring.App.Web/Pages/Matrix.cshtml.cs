@@ -7,7 +7,6 @@
 #pragma warning disable SA1600 // ElementsMustBeDocumented
 #pragma warning disable SA1649 // FileNameMustMatchTypeName
 
-using BitArrayItemsIntersection.Library;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 

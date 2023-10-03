@@ -6,7 +6,7 @@
 
 #pragma warning disable SA1600 // ElementsMustBeDocumented
 
-namespace BitArrayItemsIntersection.Library;
+namespace BooleanArrayExploring.Library;
 
 public class CustomBooleanArray
 {

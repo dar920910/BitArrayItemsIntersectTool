@@ -11,9 +11,9 @@
 #pragma warning disable SA1111 // ClosingParenthesisMustBeOnLineOfLastParameter
 #pragma warning disable SA1117 // ParametersMustBeOnSameLineOrSeparateLines
 
-using BitArrayItemsIntersection.Library;
+using BooleanArrayExploring.Library;
 
-namespace BitArrayItemsIntersection.Testing;
+namespace BooleanArrayExploring.Testing;
 
 public class CustomBooleanArrayTest
 {

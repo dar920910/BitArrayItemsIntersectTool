@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.Library", "BitArrayItemsIntersection.Library\BitArrayItemsIntersection.Library.csproj", "{580BA86F-ABC9-4E91-A252-32719E65925A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanArrayExploring.Library", "BooleanArrayExploring.Library\BooleanArrayExploring.Library.csproj", "{580BA86F-ABC9-4E91-A252-32719E65925A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.Testing", "BitArrayItemsIntersection.Testing\BitArrayItemsIntersection.Testing.csproj", "{663D9A21-9BBD-4A04-8517-A5E7D2B83300}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanArrayExploring.Testing", "BooleanArrayExploring.Testing\BooleanArrayExploring.Testing.csproj", "{663D9A21-9BBD-4A04-8517-A5E7D2B83300}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.App.CLI", "BitArrayItemsIntersection.App.CLI\BitArrayItemsIntersection.App.CLI.csproj", "{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanArrayExploring.App.CLI", "BooleanArrayExploring.App.CLI\BooleanArrayExploring.App.CLI.csproj", "{8B3DCF5E-6BE3-4F59-BE7B-6347FD9D1F20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitArrayItemsIntersection.App.Web", "BitArrayItemsIntersection.App.Web\BitArrayItemsIntersection.App.Web.csproj", "{F79B0024-731B-4969-8338-F5C22C8B809E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooleanArrayExploring.App.Web", "BooleanArrayExploring.App.Web\BooleanArrayExploring.App.Web.csproj", "{F79B0024-731B-4969-8338-F5C22C8B809E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

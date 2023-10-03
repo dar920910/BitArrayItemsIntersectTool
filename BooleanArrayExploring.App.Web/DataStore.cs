@@ -6,7 +6,7 @@
 
 #pragma warning disable SA1600 // ElementsMustBeDocumented
 
-using BitArrayItemsIntersection.Library;
+using BooleanArrayExploring.Library;
 
 public static class DataStore
 {

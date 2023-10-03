@@ -1,1 +1,1 @@
-docker run --interactive --tty --rm bitarray_items_intersection
+docker run --interactive --tty --rm boolean_array_exploring

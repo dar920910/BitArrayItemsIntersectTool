@@ -10,9 +10,9 @@
 #pragma warning disable SA1116 // SplitParametersMustStartOnLineAfterDeclaration
 #pragma warning disable SA1009 // ClosingParenthesisMustBeSpacedCorrectly
 
-using BitArrayItemsIntersection.Library;
+using BooleanArrayExploring.Library;
 
-namespace BitArrayItemsIntersection.Testing;
+namespace BooleanArrayExploring.Testing;
 
 public class BooleanArrayAnalyzerTest
 {

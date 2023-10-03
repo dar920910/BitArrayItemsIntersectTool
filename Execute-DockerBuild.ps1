@@ -1,1 +1,1 @@
-docker build --file Dockerfile --tag bitarray_items_intersection .
+docker build --file Dockerfile --tag boolean_array_exploring .

@@ -1,4 +1,4 @@
-name: BitArrayItemsIntersectTool
+name: BooleanArrayExploreTool
 
 on:
   push:

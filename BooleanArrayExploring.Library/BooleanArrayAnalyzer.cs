@@ -7,7 +7,7 @@
 #pragma warning disable SA1600 // ElementsMustBeDocumented
 #pragma warning disable SA1602 // EnumerationItemsMustBeDocumented
 
-namespace BitArrayItemsIntersection.Library;
+namespace BooleanArrayExploring.Library;
 
 public class BooleanArrayAnalyzer
 {
