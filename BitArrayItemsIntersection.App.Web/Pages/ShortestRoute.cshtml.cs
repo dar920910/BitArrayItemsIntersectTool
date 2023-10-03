@@ -14,17 +14,7 @@ public class ShortestRouteModel : PageModel
 {
     public ShortestRouteModel()
     {
-        if (DataStore.RouteElements is not null)
-        {
-            this.RouteBuildResultMessage = "The Shortest Route was successfully built!";
-        }
-        else
-        {
-            this.RouteBuildResultMessage = "Cannot build the Shortest Route between elements!";
-        }
     }
-
-    public string RouteBuildResultMessage { get; }
 
     public void OnGet()
     {
